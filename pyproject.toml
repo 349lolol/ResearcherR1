@@ -1,0 +1,32 @@
+[project]
+name = "researcherr1"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai>=1.56.0",
+    "hnswlib>=0.8.0",
+    "httpx>=0.28.1",
+    "numpy>=2.4.0",
+    "orjson>=3.11.5",
+    "pandas>=2.3.3",
+    "pydantic>=2.12.5",
+    "pypdf>=6.5.0",
+    "pytest>=9.0.2",
+    "python-dotenv>=1.2.1",
+    "rich>=14.2.0",
+    "ruff>=0.14.10",
+    "tabulate>=0.9.0",
+    "tenacity>=9.1.2",
+    "typer>=0.21.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.10",
+]
