@@ -1,4 +1,3 @@
-import hashlib
 import re
 from datetime import datetime
 from pathlib import Path
@@ -110,16 +109,11 @@ def _process_doc(source_path: Path, doc_id: str):
         stream_chunks = create_stream_chunks(cleaned_pages, doc_id)
         page_chunks = create_page_chunks(cleaned_pages, doc_id)
 
-        sha256 = hashlib.sha256()
-        with open(source_path, "rb") as f:
-            for chunk in iter(lambda: f.read(4096), b""):
-                sha256.update(chunk)
-
         corpus = CorpusRecord(
             doc_id=doc_id,
             source=Source.ARXIV,
             ingest_mode=IngestMode.PDF_FALLBACK,
-            file_hash=sha256.hexdigest(),
+            file_hash=_compute_hash(source_path),
             processing_timestamp=datetime.now(),
             version=SCHEMA_VERSION,
             pdf_path=pdf_path,
@@ -144,6 +138,15 @@ def _process_doc(source_path: Path, doc_id: str):
                     break
         print(f"Failed to process {doc_id}: {error}")
         return None
+
+
+def _compute_hash(path: Path) -> str:
+    import hashlib
+    sha256 = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            sha256.update(chunk)
+    return sha256.hexdigest()
 
 
 def _load_processed(corpus_path: Path) -> set[str]:
