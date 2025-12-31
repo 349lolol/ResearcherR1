@@ -17,7 +17,7 @@
         },
         "chunk_type": {
             "type": "string",
-            "description": "Type of chunk: section (TeX-derived), page (PDF page), or caption (figure/table)",
+            "description": "Type of chunk: section (stream), page, or caption (figure/table)",
             "enum": ["section", "page", "caption"]
         },
         "text": {

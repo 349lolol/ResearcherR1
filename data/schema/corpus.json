@@ -22,12 +22,12 @@
         },
         "source_dir": {
             "type": "string",
-            "description": "Original source directory (for TeX sources with multiple files)"
+            "description": "Original source directory"
         },
         "ingest_mode": {
             "type": "string",
             "description": "Ingestion method used for this document",
-            "enum": ["tex_ok", "pdf_fallback"]
+            "enum": ["pdf_fallback"]
         },
         "title": {
             "type": "string",

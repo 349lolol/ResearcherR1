@@ -12,7 +12,6 @@ dependencies = [
     "orjson>=3.11.5",
     "pandas>=2.3.3",
     "pydantic>=2.12.5",
-    "pypandoc>=1.16.2",
     "pypdf>=6.5.0",
     "pytest>=9.0.2",
     "python-dotenv>=1.2.1",
