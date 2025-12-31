@@ -4,7 +4,7 @@ from ingest.models import ChunkRecord, ChunkType, PageRecord
 
 
 def create_stream_chunks(
-    pages: list[PageRecord], doc_id: str, target_tokens: int = 800, overlap: int = 100
+    pages: list[PageRecord], doc_id: str, target_tokens: int = 400, overlap: int = 100
 ) -> list[ChunkRecord]:
     if not pages:
         return []
