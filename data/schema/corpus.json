@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://local/schemas/corpus",
+    "title": "Corpus Document Metadata",
+    "description": "Document-level metadata for research papers in the corpus. One record per document.",
+    "type": "object",
+    "properties": {
+        "doc_id": {
+            "type": "string",
+            "description": "Unique document identifier (format: {source}_{identifier}, e.g., 'arxiv_2301.00001')",
+            "minLength": 1
+        },
+        "source": {
+            "type": "string",
+            "description": "Source system or origin of the document",
+            "enum": ["arxiv", "manual_upload", "doi", "url", "local"]
+        },
+        "pdf_path": {
+            "type": "string",
+            "description": "File system path to the PDF file",
+            "minLength": 1
+        },
+        "source_dir": {
+            "type": "string",
+            "description": "Original source directory (for TeX sources with multiple files)"
+        },
+        "ingest_mode": {
+            "type": "string",
+            "description": "Ingestion method used for this document",
+            "enum": ["tex_ok", "pdf_fallback"]
+        },
+        "title": {
+            "type": "string",
+            "description": "Document title (extracted from paper or metadata)"
+        },
+        "page_count": {
+            "type": "integer",
+            "description": "Total number of pages in the document (if PDF)",
+            "minimum": 1
+        },
+        "file_hash": {
+            "type": "string",
+            "description": "SHA256 hash of the original file for integrity checking and deduplication",
+            "pattern": "^[a-f0-9]{64}$"
+        },
+        "arxiv_id": {
+            "type": "string",
+            "description": "ArXiv identifier (format: YYMM.NNNNN or YYMM.NNNNNVV)",
+            "pattern": "^\\d{4}\\.\\d{4,5}(v\\d+)?$"
+        },
+        "processing_timestamp": {
+            "type": "string",
+            "description": "ISO 8601 timestamp when the document was processed",
+            "format": "date-time"
+        },
+        "version": {
+            "type": "string",
+            "description": "Schema/processing version for tracking re-processing (semantic versioning)",
+            "pattern": "^v\\d+\\.\\d+\\.\\d+$"
+        }
+    },
+    "required": [
+        "doc_id",
+        "source",
+        "ingest_mode",
+        "file_hash",
+        "processing_timestamp",
+        "version"
+    ],
+    "additionalProperties": false
+}

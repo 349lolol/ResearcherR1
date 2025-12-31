@@ -1,7 +1,24 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://local/schemas/page-info",
-    "doc_id": "string",
-    "page": "integer",
-    "text": "string"
+    "title": "Page Information",
+    "description": "Page-level data for raw page extraction and storage. Separate from semantic chunks.",
+    "type": "object",
+    "properties": {
+        "doc_id": {
+            "type": "string",
+            "description": "Reference to parent document"
+        },
+        "page": {
+            "type": "integer",
+            "description": "Page number (1-indexed)",
+            "minimum": 1
+        },
+        "text": {
+            "type": "string",
+            "description": "Full text content of the page"
+        }
+    },
+    "required": ["doc_id", "page", "text"],
+    "additionalProperties": false
 }

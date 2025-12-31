@@ -1,0 +1,84 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://local/schemas/chunks",
+    "title": "Document Chunks",
+    "description": "Chunk-level data for retrieval, embedding, and citation. Many chunks per document.",
+    "type": "object",
+    "properties": {
+        "chunk_id": {
+            "type": "string",
+            "description": "Unique chunk identifier (format: {doc_id}_chunk_{index}, e.g., 'arxiv_2301.00001_chunk_042')",
+            "minLength": 1
+        },
+        "doc_id": {
+            "type": "string",
+            "description": "Reference to parent document in corpus",
+            "minLength": 1
+        },
+        "chunk_type": {
+            "type": "string",
+            "description": "Type of chunk: section (TeX-derived), page (PDF page), or caption (figure/table)",
+            "enum": ["section", "page", "caption"]
+        },
+        "text": {
+            "type": "string",
+            "description": "The actual text content of this chunk",
+            "minLength": 1
+        },
+        "heading_path": {
+            "type": "string",
+            "description": "Hierarchical heading path for section-based chunks (e.g., 'Introduction > Related Work > Transformers')"
+        },
+        "page_start": {
+            "type": "integer",
+            "description": "Starting page number for this chunk (1-indexed)",
+            "minimum": 1
+        },
+        "page_end": {
+            "type": "integer",
+            "description": "Ending page number for this chunk (1-indexed, inclusive)",
+            "minimum": 1
+        }
+    },
+    "required": [
+        "chunk_id",
+        "doc_id",
+        "chunk_type",
+        "text"
+    ],
+    "additionalProperties": false,
+    "allOf": [
+        {
+            "if": {
+                "properties": {
+                    "chunk_type": {"const": "section"}
+                }
+            },
+            "then": {
+                "description": "Section chunks should have heading_path for hierarchical context"
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "chunk_type": {"const": "page"}
+                }
+            },
+            "then": {
+                "description": "Page chunks should have page_start and page_end for page boundaries"
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "page_end": {"type": "integer"}
+                },
+                "required": ["page_end"]
+            },
+            "then": {
+                "required": ["page_start"],
+                "description": "If page_end is specified, page_start must also be specified"
+            }
+        }
+    ]
+}
