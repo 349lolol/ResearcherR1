@@ -62,3 +62,10 @@ class ChunkRecord(BaseModel):
     class Config:
         extra = "forbid"
         use_enum_values = True
+
+class EmbedRecord(BaseModel):
+    chunk_id: str = Field(min_length=1)
+    embedding: list[float]
+
+    class Config:
+        extra = "forbid"

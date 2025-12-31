@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://local/schemas/embeddings",
+    "title": "Chunk Embeddings",
+    "description": "Vector embeddings for chunks, used for semantic search",
+    "type": "object",
+    "properties": {
+        "chunk_id": {
+            "type": "string",
+            "description": "Reference to chunk in chunks.jsonl",
+            "minLength": 1
+        },
+        "embedding": {
+            "type": "array",
+            "items": {"type": "number"},
+            "description": "Vector embedding"
+        }
+    },
+    "required": ["chunk_id", "embedding"],
+    "additionalProperties": false
+}
