@@ -4,7 +4,9 @@ class GeminiEmbeddings:
     def __init__(self, model: str = "models/embedding-001"):
         self.embeddings = GoogleGenerativeAIEmbeddings(
             model = model,
-            task_type = "RETRIEVAL_DOCUMENT"
+            task_type = "RETRIEVAL_DOCUMENT",
+            output_dimensionality = 768
         )
     def get_langchain_embeddings(self):
         return self.embeddings
+    

@@ -6,6 +6,8 @@ from qdrant_client.models import Filter, FieldCondition, MatchValue
 
 from ingest.qdrant_config import CORPUS_VERSION
 
+MAX_DOCS = 100000
+
 class QdrantIndexer:
     def __init__(self):
         self.config = QdrantConfig()
@@ -76,7 +78,7 @@ class QdrantIndexer:
                 collection_name=self.config.collection_name,
                 limit=100,
                 offset=offset,
-                with_payload=["doc_id"],
+                with_payload=["metadata.doc_id"],
                 with_vectors=False
             )
 
@@ -85,6 +87,10 @@ class QdrantIndexer:
                     doc_id = point.payload["metadata"].get("doc_id")
                     if doc_id:
                         doc_ids.add(doc_id)
+
+            if len(doc_ids) >= MAX_DOCS:
+                print(f"Total number of docs (#{len(doc_ids)})exceeded {MAX_DOCS}")
+                return doc_ids
 
             if next_offset is None:
                 break

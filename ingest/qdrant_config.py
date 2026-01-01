@@ -12,7 +12,7 @@ class QdrantConfig(BaseModel):
 
     mode: Literal["docker", "embedded", "memory"] = Field(
         default_factory=lambda: os.getenv("QDRANT_MODE", "docker")
-    )
+    ) #type: ignore
     host: str = Field(
         default_factory=lambda: os.getenv("QDRANT_HOST", "localhost")
     )

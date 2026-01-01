@@ -126,7 +126,7 @@ def _process_doc(
             print(f"No pages extracted from {source_path}")
             return False
 
-        cleaned_pages, _ = clean_pages(pages)
+        cleaned_pages = clean_pages(pages)
 
         stream_chunks = chunker.create_stream_chunks(cleaned_pages, doc_id)
         page_chunks = chunker.create_page_chunks(cleaned_pages, doc_id)

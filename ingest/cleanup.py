@@ -5,9 +5,9 @@ from collections import Counter
 from ingest.models import PageRecord
 
 
-def clean_pages(pages: list[PageRecord]) -> tuple[list[PageRecord], dict]:
+def clean_pages(pages: list[PageRecord]) -> list[PageRecord]:
     if not pages:
-        return pages, {}
+        return pages
 
     header = _detect_repeated(pages, is_header=True)
     footer = _detect_repeated(pages, is_header=False)
@@ -29,7 +29,7 @@ def clean_pages(pages: list[PageRecord]) -> tuple[list[PageRecord], dict]:
 
         cleaned.append(PageRecord(doc_id=page.doc_id, page=page.page, text=text))
 
-    return cleaned, {}
+    return cleaned
 
 
 def _detect_repeated(pages: list[PageRecord], is_header: bool, max_lines: int = 3):
