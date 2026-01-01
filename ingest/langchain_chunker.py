@@ -50,19 +50,22 @@ class LangChainChunker:
             chunk_end = chunk_start + len(chunk.page_content)
 
             page_start, page_end = self._find_page_span(chunk_start, chunk_end, boundaries)
-            result.append(
-                Document(
-                    page_content = chunk.page_content,
-                    metadata={
-                        "chunk_id": f"{doc_id}_stream_{i:04d}",
-                        "doc_id": doc_id,
-                        "chunk_type": "STREAM",
-                        "page_start": page_start,
-                        "page_end": page_end,
-                        "corpus_version": CORPUS_VERSION
-                    }
+            if page_start == -1 or page_end == -1:
+                print(f"chunk {doc_id}_stream_{i:04d} has corrupted boundaries")
+            else:
+                result.append(
+                    Document(
+                        page_content = chunk.page_content,
+                        metadata={
+                            "chunk_id": f"{doc_id}_stream_{i:04d}",
+                            "doc_id": doc_id,
+                            "chunk_type": "STREAM",
+                            "page_start": page_start,
+                            "page_end": page_end,
+                            "corpus_version": CORPUS_VERSION
+                        }
+                    )
                 )
-            )
         return result
 
     def _compute_page_boundaries(self, pages: list[PageRecord]) -> list[dict]:
