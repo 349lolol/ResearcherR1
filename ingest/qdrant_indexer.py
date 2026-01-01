@@ -6,8 +6,6 @@ from qdrant_client.models import Filter, FieldCondition, MatchValue
 
 
 class QdrantIndexer:
-    """Direct interface to Qdrant. No JSONL, no intermediate storage."""
-
     def __init__(self):
         self.config = QdrantConfig()
         self.client = self.config.get_client()
@@ -52,3 +50,40 @@ class QdrantIndexer:
             collection_name=self.config.collection_name,
             points_selector=points_filter
         )
+
+    def count(self) -> int:
+        info = self.client.get_collection(self.config.collection_name)
+        return info.points_count or 0
+
+    def doc_exists(self, doc_id: str) -> bool:
+        results = self.vector_store.similarity_search(
+            query="",
+            k=1,
+            filter={"doc_id": doc_id}  # type: ignore
+        )
+        return len(results) > 0
+
+    def list_doc_ids(self) -> set[str]:
+        doc_ids = set()
+        offset = None
+
+        while True:
+            points, next_offset = self.client.scroll(
+                collection_name=self.config.collection_name,
+                limit=100,
+                offset=offset,
+                with_payload=["metadata.doc_id"],
+                with_vectors=False
+            )
+
+            for point in points:
+                if point.payload and "metadata" in point.payload:
+                    doc_id = point.payload["metadata"].get("doc_id")
+                    if doc_id:
+                        doc_ids.add(doc_id)
+
+            if next_offset is None:
+                break
+            offset = next_offset
+
+        return doc_ids
