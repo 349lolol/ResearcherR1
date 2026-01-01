@@ -2,6 +2,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 from ingest.models import PageRecord
 
+from ingest.qdrant_config import CORPUS_VERSION
+
 class LangChainChunker:
     def __init__(
         self,

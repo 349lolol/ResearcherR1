@@ -8,6 +8,9 @@ from ingest.extractors.pdf import extract_pdf
 from ingest.langchain_chunker import LangChainChunker
 from ingest.qdrant_indexer import QdrantIndexer
 
+from dotenv import load_dotenv
+load_dotenv()
+
 app = typer.Typer()
 
 

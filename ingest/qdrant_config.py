@@ -5,6 +5,8 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 import os
 
+CORPUS_VERSION = int(os.getenv("CORPUS_VERSION", "1"))
+
 class QdrantConfig(BaseModel):
     """Qdrant connection configuration."""
 

@@ -4,6 +4,7 @@ from ingest.qdrant_config import QdrantConfig
 from ingest.langchain_embeddings import GeminiEmbeddings
 from qdrant_client.models import Filter, FieldCondition, MatchValue
 
+from ingest.qdrant_config import CORPUS_VERSION
 
 class QdrantIndexer:
     def __init__(self):
@@ -11,12 +12,13 @@ class QdrantIndexer:
         self.client = self.config.get_client()
         self.config.create_collection(self.client)
         self.embeddings = GeminiEmbeddings()
-
         self.vector_store = QdrantVectorStore(
             client=self.client,
             collection_name=self.config.collection_name,
             embedding=self.embeddings.get_langchain_embeddings()
         )
+        self._ensure_corpus_version()
+
     
     def add_documents(self, documents: list[Document], batch_size: int = 100) -> list[str]:
         return self.vector_store.add_documents(
@@ -24,23 +26,19 @@ class QdrantIndexer:
             batch_size=batch_size
         )
     
-    def search(self, query: str, top_k: int = 5, filter_doc_id: str = "", min_corpus_version: int = 0) -> list[tuple[Document, float]]:
+    def search(self, query: str, top_k: int = 5, filter_doc_id: str = "") -> list[tuple[Document, float]]:
         if filter_doc_id:
             return self.vector_store.similarity_search_with_score(
                 query = query,
                 k = top_k,
                 filter = {
                     "doc_id": filter_doc_id,
-                    "corpus_version": {"$gte": min_corpus_version}
                     } #type: ignore
             )
         else:
             return self.vector_store.similarity_search_with_score(
                 query = query,
                 k=top_k,
-                filter = {
-                    "corpus_version": {"$gte": min_corpus_version}
-                } #type: ignore
             )
         
     def delete_doc_by_id(self, doc_id: str) -> None:
@@ -93,3 +91,19 @@ class QdrantIndexer:
             offset = next_offset
 
         return doc_ids
+    
+    def _ensure_corpus_version(self):
+        #compare first chunk version against .env
+        points, _ = self.client.scroll(
+            collection_name = self.config.collection_name,
+            limit = 1,
+            with_payload = ["metadata.corpus_version"],
+            with_vectors = False
+        )
+
+        if points and points[0].payload:
+            stored_version = points[0].payload.get("metadata", {}).get("corpus_version")
+            if stored_version != CORPUS_VERSION:
+                print(f"Corpus version mismatch ({stored_version} != {CORPUS_VERSION}), wiping collection")
+                self.client.delete_collection(self.config.collection_name)
+                self.config.create_collection(self.client)
