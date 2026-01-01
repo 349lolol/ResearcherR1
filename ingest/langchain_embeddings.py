@@ -7,6 +7,7 @@ class GeminiEmbeddings:
             task_type = "RETRIEVAL_DOCUMENT",
             output_dimensionality = 768
         )
+    #note that qdrant normalizes vectors to len 1
     def get_langchain_embeddings(self):
         return self.embeddings
     
