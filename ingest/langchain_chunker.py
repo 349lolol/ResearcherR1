@@ -27,7 +27,8 @@ class LangChainChunker:
                     "doc_id": doc_id,
                     "chunk_type": "PAGE",
                     "page_start": page.page,
-                    "page_end": page.page
+                    "page_end": page.page,
+                    "corpus_version": CORPUS_VERSION
                 }
             )
             for page in pages
@@ -55,7 +56,8 @@ class LangChainChunker:
                         "doc_id": doc_id,
                         "chunk_type": "STREAM",
                         "page_start": page_start,
-                        "page_end": page_end
+                        "page_end": page_end,
+                        "corpus_version": CORPUS_VERSION
                     }
                 )
             )

@@ -5,7 +5,6 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 import os
 
-
 class QdrantConfig(BaseModel):
     """Qdrant connection configuration."""
 

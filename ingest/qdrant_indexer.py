@@ -24,24 +24,30 @@ class QdrantIndexer:
             batch_size=batch_size
         )
     
-    def search(self, query: str, top_k: int = 5, filter_doc_id: str = "") -> list[tuple[Document, float]]:
+    def search(self, query: str, top_k: int = 5, filter_doc_id: str = "", min_corpus_version: int = 0) -> list[tuple[Document, float]]:
         if filter_doc_id:
             return self.vector_store.similarity_search_with_score(
                 query = query,
                 k = top_k,
-                filter = {"doc_id": filter_doc_id} #type: ignore
+                filter = {
+                    "doc_id": filter_doc_id,
+                    "corpus_version": {"$gte": min_corpus_version}
+                    } #type: ignore
             )
         else:
             return self.vector_store.similarity_search_with_score(
-                query=query,
-                k=top_k
+                query = query,
+                k=top_k,
+                filter = {
+                    "corpus_version": {"$gte": min_corpus_version}
+                } #type: ignore
             )
         
     def delete_doc_by_id(self, doc_id: str) -> None:
         points_filter = Filter(
             must=[
                 FieldCondition(
-                    key="metadata.doc_id",
+                    key="doc_id",
                     match=MatchValue(value=doc_id)
                 )
             ]
@@ -57,7 +63,7 @@ class QdrantIndexer:
 
     def doc_exists(self, doc_id: str) -> bool:
         results = self.vector_store.similarity_search(
-            query="",
+            query="a",
             k=1,
             filter={"doc_id": doc_id}  # type: ignore
         )
@@ -72,7 +78,7 @@ class QdrantIndexer:
                 collection_name=self.config.collection_name,
                 limit=100,
                 offset=offset,
-                with_payload=["metadata.doc_id"],
+                with_payload=["doc_id"],
                 with_vectors=False
             )
 
