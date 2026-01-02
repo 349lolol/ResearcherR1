@@ -5,9 +5,10 @@ from eval.config import EvalConfig
 from eval.pipeline import route, build_packet, deduce
 from eval.retrieve import retrieve
 from eval.adapters.base import BaseModelAdapter
+from ingest.qdrant_indexer import QdrantIndexer
 
 
-def build_graph(config: EvalConfig, adapter: BaseModelAdapter):
+def build_graph(config: EvalConfig, adapter: BaseModelAdapter, indexer: QdrantIndexer):
     graph = StateGraph(EvalState)
 
     def router_node(state: EvalState) -> dict:
@@ -21,7 +22,7 @@ def build_graph(config: EvalConfig, adapter: BaseModelAdapter):
 
     def retrieve_node(state: EvalState) -> dict:
         assert state.router_plan is not None
-        chunks = retrieve(state.router_plan.expanded_queries, config.top_k)
+        chunks = retrieve(state.router_plan.expanded_queries, config.top_k, indexer)
         return {"retrieved_chunks": chunks}
 
     def packet_node(state: EvalState) -> dict:

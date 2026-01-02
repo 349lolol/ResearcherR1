@@ -1,9 +1,8 @@
 from eval.models import CitedChunk
 from ingest.qdrant_indexer import QdrantIndexer
 
-def retrieve(queries: list[str], top_k: int) -> list[CitedChunk]:
+def retrieve(queries: list[str], top_k: int, indexer: QdrantIndexer) -> list[CitedChunk]:
     responses = []
-    indexer = QdrantIndexer()
     for query in queries:
         response = indexer.search(query, top_k)
         responses.append(response)

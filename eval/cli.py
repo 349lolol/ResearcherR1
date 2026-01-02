@@ -5,6 +5,7 @@ from eval.models import EvalState
 from eval.graph import build_graph
 from eval.adapters.openai import OpenAIAdapter
 from eval.adapters.gemini import GeminiAdapter
+from ingest.qdrant_indexer import QdrantIndexer
 
 app = typer.Typer()
 
@@ -26,13 +27,14 @@ def ask(
 ):
     config = EvalConfig(top_k=top_k)
     adapter = get_adapter(model)
+    indexer = QdrantIndexer()
 
     print(f"Question: {question}")
     print(f"Model: {model}")
     print(f"Top-k: {top_k}")
     print("-" * 40)
 
-    pipeline = build_graph(config, adapter)
+    pipeline = build_graph(config, adapter, indexer)
     result = pipeline.invoke(EvalState(question=question))
 
     print("Answer:")
