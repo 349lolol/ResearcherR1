@@ -12,13 +12,16 @@ Make queries specific and varied to maximize retrieval coverage."""
     result = adapter.generate(question, system_prompt=system_prompt)
     try:
         data = json.loads(result.text)
-    except json.JSONDecodeError:
+        queries = data.get("expanded_queries", [question])
+        if not queries or not isinstance(queries, list):
+            queries = [question]
+        return RouterPlan(
+            original_query=data.get("original_query", question),
+            expanded_queries=queries
+        ), result
+    except json.JSONDecodeError as e:
+        print(f"Router JSON parse failed: {e}")
         return RouterPlan(original_query=question, expanded_queries=[question]), result
-
-    return RouterPlan(
-        original_query=data["original_query"],
-        expanded_queries=data["expanded_queries"]
-    ), result
 
 def build_packet(chunks: list[CitedChunk]) -> str:
     response = ""
