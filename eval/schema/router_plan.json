@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RouterPlan",
+  "description": "Router output with expanded queries",
+  "type": "object",
+  "properties": {
+    "original_query": {
+      "type": "string",
+      "description": "The original question from the user"
+    },
+    "expanded_queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "2-3 search queries expanded from the original question"
+    }
+  },
+  "required": ["original_query", "expanded_queries"],
+  "additionalProperties": false
+}
