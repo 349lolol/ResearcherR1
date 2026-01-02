@@ -24,3 +24,11 @@ def build_packet(chunks: list[CitedChunk]) -> str:
         response = response + f"{chunk.text}\n"
     return response
 
+def deduce(question: str, evidence: str, adapter: BaseModelAdapter) -> str:
+    system_prompt = """Answer the question using ONLY the evidence provided.
+Cite sources using [N] format matching the evidence numbers.
+Do not add information not in the evidence."""
+
+    prompt = f"Question: {question}\n\nEvidence\n{evidence}"
+    result = adapter.generate(prompt, system_prompt=system_prompt)
+    return result.text
