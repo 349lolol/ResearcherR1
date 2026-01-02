@@ -22,7 +22,7 @@ def get_adapter(model: str):
 def ask(
     question: str,
     model: str = typer.Option("openai", help="Model to use: openai or gemini"),
-    top_k: int = typer.Option(10, help="Number of chunks to retrieve"),
+    top_k: int = typer.Option(10, help="Number of chunks to retrieve", min=1, max=50),
 ):
     config = EvalConfig(top_k=top_k)
     adapter = get_adapter(model)
@@ -40,6 +40,8 @@ def ask(
     print("-" * 40)
     print(f"Chunks retrieved: {len(result['retrieved_chunks'])}")
     print(f"Queries expanded: {len(result['router_plan'].expanded_queries)}")
+    print(f"Total tokens: {result['total_tokens']}")
+    print(f"Total cost: ${result['total_cost']:.4f}")
 
 
 if __name__ == "__main__":

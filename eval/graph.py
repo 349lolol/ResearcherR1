@@ -11,8 +11,13 @@ def build_graph(config: EvalConfig, adapter: BaseModelAdapter):
     graph = StateGraph(EvalState)
 
     def router_node(state: EvalState) -> dict:
-        plan = route(state.question, adapter)
-        return {"router_plan": plan}
+        plan, gen = route(state.question, adapter)
+        cost = adapter.get_cost(gen.input_tokens, gen.output_tokens)
+        return {
+            "router_plan": plan,
+            "total_tokens": state.total_tokens + gen.input_tokens + gen.output_tokens,
+            "total_cost": state.total_cost + cost,
+        }
 
     def retrieve_node(state: EvalState) -> dict:
         assert state.router_plan is not None
@@ -25,8 +30,13 @@ def build_graph(config: EvalConfig, adapter: BaseModelAdapter):
 
     def deduce_node(state: EvalState) -> dict:
         assert state.evidence_packet is not None
-        answer = deduce(state.question, state.evidence_packet, adapter)
-        return {"final_answer": answer}
+        answer, gen = deduce(state.question, state.evidence_packet, adapter)
+        cost = adapter.get_cost(gen.input_tokens, gen.output_tokens)
+        return {
+            "final_answer": answer,
+            "total_tokens": state.total_tokens + gen.input_tokens + gen.output_tokens,
+            "total_cost": state.total_cost + cost,
+        }
 
     graph.add_node("router", router_node)
     graph.add_node("retrieve", retrieve_node)
