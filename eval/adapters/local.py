@@ -1,4 +1,4 @@
-"""OpenAI adapter for gpt-5."""
+"""Local LLM adapter for LM Studio (OpenAI-compatible API)."""
 
 import os
 
@@ -6,14 +6,14 @@ from openai import OpenAI
 
 from eval.adapters.base import BaseModelAdapter, GenerationResult
 
-# gpt-5 pricing per 1M tokens (estimated)
-INPUT_PRICE = 5.00
-OUTPUT_PRICE = 15.00
 
-
-class OpenAIAdapter(BaseModelAdapter):
-    def __init__(self):
-        self._client = OpenAI(api_key=os.getenv("OPENAI_API_KEY")) 
+class LocalAdapter(BaseModelAdapter):
+    def __init__(self, model: str = "ministral-8b-instruct"):
+        self._model = model
+        self._client = OpenAI(
+            api_key="lm-studio",  # LM Studio doesn't need a real key
+            base_url=os.getenv("LM_STUDIO_URL", "http://localhost:1234/v1"),
+        )
 
     def generate(self, prompt: str, *, system_prompt: str | None = None) -> GenerationResult:
         messages = []
@@ -22,7 +22,7 @@ class OpenAIAdapter(BaseModelAdapter):
         messages.append({"role": "user", "content": prompt})
 
         response = self._client.chat.completions.create(
-            model="gpt-5",
+            model=self._model,
             messages=messages,
             temperature=0.2,
         )
@@ -35,4 +35,4 @@ class OpenAIAdapter(BaseModelAdapter):
         )
 
     def get_cost(self, input_tokens: int, output_tokens: int) -> float:
-        return (input_tokens / 1_000_000) * INPUT_PRICE + (output_tokens / 1_000_000) * OUTPUT_PRICE
+        return 0.0  # Local = free
