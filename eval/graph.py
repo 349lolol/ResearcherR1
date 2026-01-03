@@ -4,6 +4,8 @@ from eval.models import EvalState
 from eval.config import EvalConfig
 from eval.pipeline import route, build_packet, deduce
 from eval.retrieve import retrieve
+from eval.verify import verify
+from eval.repair import repair
 from eval.adapters.base import BaseModelAdapter
 from ingest.qdrant_indexer import QdrantIndexer
 
@@ -33,11 +35,34 @@ def build_graph(config: EvalConfig, adapter: BaseModelAdapter, indexer: QdrantIn
         assert state.evidence_packet is not None
         answer, gen = deduce(state.question, state.evidence_packet, adapter)
         cost = adapter.get_cost(gen.input_tokens, gen.output_tokens)
-        return {
-            "final_answer": answer,
-            "total_tokens": state.total_tokens + gen.input_tokens + gen.output_tokens,
-            "total_cost": state.total_cost + cost,
-        }
+        total_tokens = state.total_tokens + gen.input_tokens + gen.output_tokens
+        total_cost = state.total_cost + cost
+
+        # Naive: skip verification
+        if config.ablation == "Naive":
+            return {"final_answer": answer, "total_tokens": total_tokens, "total_cost": total_cost}
+
+        # EFR / EFR+Verify: verify
+        verification, verify_gen = verify(answer, state.retrieved_chunks, adapter)
+        verify_cost = adapter.get_cost(verify_gen.input_tokens, verify_gen.output_tokens)
+        total_tokens += verify_gen.input_tokens + verify_gen.output_tokens
+        total_cost += verify_cost
+
+        # All claims supported: done
+        if verification.support_precision >= 1.0:
+            return {"final_answer": answer, "verification": verification, "total_tokens": total_tokens, "total_cost": total_cost}
+
+        # EFR: fail without repair
+        if config.ablation == "EFR":
+            return {"final_answer": answer, "verification": verification, "errors": state.errors + ["Verification failed"], "total_tokens": total_tokens, "total_cost": total_cost}
+
+        # EFR+Verify: repair
+        repaired, repair_gen = repair(answer, verification, state.evidence_packet, adapter)
+        repair_cost = adapter.get_cost(repair_gen.input_tokens, repair_gen.output_tokens)
+        total_tokens += repair_gen.input_tokens + repair_gen.output_tokens
+        total_cost += repair_cost
+
+        return {"final_answer": repaired, "verification": verification, "repair_count": 1, "total_tokens": total_tokens, "total_cost": total_cost}
 
     graph.add_node("router", router_node)
     graph.add_node("retrieve", retrieve_node)
