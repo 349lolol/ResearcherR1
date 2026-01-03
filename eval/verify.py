@@ -47,7 +47,7 @@ def check_support(claims: list[Claim], chunks: list[CitedChunk], adapter: BaseMo
                 if 0 <= i < len(batch):
                     claims[start + i].supported = result.get("supported", False)
         except json.JSONDecodeError:
-            pass #discard batch as unsupported
+            print(f"Warning: batch {start}-{start + len(batch)} failed to parse JSON")
 
     return (claims, GenerationResult(text="", input_tokens=total_in, output_tokens=total_out))
 
