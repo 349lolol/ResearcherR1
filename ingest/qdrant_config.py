@@ -4,6 +4,8 @@ from pydantic import BaseModel, Field
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 CORPUS_VERSION = int(os.getenv("CORPUS_VERSION", "1"))
 
