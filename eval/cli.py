@@ -5,6 +5,7 @@ from eval.models import EvalState
 from eval.graph import build_graph
 from eval.adapters.openai import OpenAIAdapter
 from eval.adapters.gemini import GeminiAdapter
+from eval.adapters.local import LocalAdapter
 from ingest.qdrant_indexer import QdrantIndexer
 
 app = typer.Typer()
@@ -15,6 +16,8 @@ def get_adapter(model: str):
         return OpenAIAdapter()
     elif model == "gemini":
         return GeminiAdapter()
+    elif model == "local":
+        return LocalAdapter()
     else:
         raise ValueError(f"Unknown model: {model}")
 
@@ -22,7 +25,7 @@ def get_adapter(model: str):
 @app.command()
 def ask(
     question: str,
-    model: str = typer.Option("openai", help="Model to use: openai or gemini"),
+    model: str = typer.Option("openai", help="Model: openai, gemini, or local"),
     top_k: int = typer.Option(10, help="Number of chunks to retrieve", min=1, max=50),
     ablation: str = typer.Option("Naive", help="Mode: Naive, EFR, or EFR+Verify"),
 ):

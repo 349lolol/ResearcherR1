@@ -15,7 +15,8 @@ OUTPUT_PRICE = 15.00
 
 class OpenAIAdapter(BaseModelAdapter):
     def __init__(self):
-        self._client = OpenAI(api_key=os.getenv("OPENAI_API_KEY")) 
+        self._client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self._model = os.getenv("OPENAI_MODEL", "gpt-4o") 
 
     @retry(
             stop=stop_after_attempt(3),
@@ -29,7 +30,7 @@ class OpenAIAdapter(BaseModelAdapter):
         messages.append({"role": "user", "content": prompt})
 
         response = self._client.chat.completions.create(
-            model="gpt-5",
+            model=self._model,
             messages=messages,
             temperature=0.2,
         )

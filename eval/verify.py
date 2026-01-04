@@ -63,6 +63,6 @@ def _build_prompt(batch: list[Claim], chunks: list[CitedChunk]) -> str:
         batch_indices.update(claim.cited_indices)
 
     for j in sorted(batch_indices):
-        if j < len(chunks):
+        if  0 <= j < len(chunks):
             prompt += f"[{j}] {chunks[j].text}\n"
     return prompt

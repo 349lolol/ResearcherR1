@@ -19,11 +19,11 @@ def retrieve(queries: list[str], top_k: int, indexer: QdrantIndexer) -> list[Cit
     top_k_chunks = sorted_chunks[:top_k]
     return [
         CitedChunk(
-            chunk_id=chunk.metadata["chunk_id"],
-            doc_id=chunk.metadata["doc_id"],
-            chunk_type=chunk.metadata["chunk_type"],
-            page_start=chunk.metadata["page_start"],
-            page_end=chunk.metadata["page_end"],
+            chunk_id=chunk.metadata.get("chunk_id", -1),
+            doc_id=chunk.metadata.get("doc_id", -1),
+            chunk_type=chunk.metadata.get("chunk_type", "failed"),
+            page_start=chunk.metadata.get("page_start", -1),
+            page_end=chunk.metadata.get("page_end", -1),
             text=chunk.page_content,
             score=score
         )

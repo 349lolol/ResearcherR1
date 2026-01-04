@@ -16,6 +16,7 @@ OUTPUT_PRICE = 0.60
 class GeminiAdapter(BaseModelAdapter):
     def __init__(self):
         self._client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+        self._model = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 
     @retry(
         stop=stop_after_attempt(3),
@@ -29,7 +30,7 @@ class GeminiAdapter(BaseModelAdapter):
         )
 
         response = self._client.models.generate_content(
-            model="gemini-3-flash",
+            model=self._model,
             contents=prompt,
             config=config,
         )

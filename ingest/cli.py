@@ -73,8 +73,8 @@ def search(query: str, top_k: int = 5, doc_id: str = ""):
     results = indexer.search(query, top_k=top_k, filter_doc_id=doc_id)
 
     for doc, score in results:
-        print(f"\n[{score:.3f}] {doc.metadata['chunk_id']}")
-        print(f"Pages {doc.metadata['page_start']}-{doc.metadata['page_end']}")
+        print(f"\n[{score:.3f}] {doc.metadata.get('chunk_id', -1)}")
+        print(f"Pages {doc.metadata.get('page_start', -1)}-{doc.metadata.get('page_end', -1)}")
         print(doc.page_content[:200] + "...")
 
 

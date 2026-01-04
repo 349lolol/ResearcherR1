@@ -10,8 +10,8 @@ from eval.adapters.base import BaseModelAdapter, GenerationResult
 
 
 class LocalAdapter(BaseModelAdapter):
-    def __init__(self, model: str = "ministral-8b-instruct"):
-        self._model = model
+    def __init__(self):
+        self._model = os.getenv("LOCAL_MODEL", "ministral-8b-instruct")
         self._client = OpenAI(
             api_key="lm-studio",  # LM Studio doesn't need a real key
             base_url=os.getenv("LM_STUDIO_URL", "http://localhost:1234/v1"),
