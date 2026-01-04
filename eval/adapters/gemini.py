@@ -3,6 +3,8 @@
 import os
 
 from google import genai
+from google.api_core.exceptions import ResourceExhausted, GoogleAPIError
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 from eval.adapters.base import BaseModelAdapter, GenerationResult
 
@@ -15,6 +17,11 @@ class GeminiAdapter(BaseModelAdapter):
     def __init__(self):
         self._client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(min=1, max=60),
+        retry=retry_if_exception_type((ResourceExhausted, GoogleAPIError))
+    )
     def generate(self, prompt: str, *, system_prompt: str | None = None) -> GenerationResult:
         config = genai.types.GenerateContentConfig(
             temperature=0.2,

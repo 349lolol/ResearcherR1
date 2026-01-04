@@ -27,6 +27,7 @@ dependencies = [
     "tenacity>=9.1.2",
     "tiktoken>=0.8.0",
     "typer>=0.21.0",
+    "google-api-core>=2.28.1",
 ]
 
 [dependency-groups]
