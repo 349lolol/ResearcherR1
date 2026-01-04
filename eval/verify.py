@@ -1,11 +1,21 @@
 from eval.models import Claim, CitedChunk, VerificationResult
 from eval.adapters.base import BaseModelAdapter, GenerationResult
 
-import re 
+import re
 import json
 
 
 BATCH_SIZE = 5
+
+
+def _extract_json(text: str) -> str:
+    """Strip markdown code fences from LLM response."""
+    text = text.strip()
+    if text.startswith("```"):
+        lines = text.split("\n")
+        lines = [line for line in lines if not line.strip().startswith("```")]
+        text = "\n".join(lines)
+    return text
 
 VERIFY_SYSTEM_PROMPT = """You are a claim verification assistant. For each sentence, determine if it is supported.
 
@@ -19,7 +29,13 @@ def extract_claims(answer: str) -> list[Claim]:
     sentences = re.split(r'(?<=[.!?])\s+', answer)
     references = []
     for i, sentence in enumerate(sentences):
-        references.append([int(n) for n in re.findall(r'\[(\d+)\]', sentence)])
+        # Match both [0] [1] and [0, 1] citation formats
+        # Find all bracketed content, then extract numbers from within
+        brackets = re.findall(r'\[([^\]]+)\]', sentence)
+        nums = []
+        for bracket in brackets:
+            nums.extend([int(n) for n in re.findall(r'\d+', bracket)])
+        references.append(nums)
     claims = []
     for i, points in enumerate(references):
         claims.append(Claim(
@@ -41,7 +57,8 @@ def check_support(claims: list[Claim], chunks: list[CitedChunk], adapter: BaseMo
         total_out += gen.output_tokens
 
         try:
-            data = json.loads(gen.text)
+            clean_text = _extract_json(gen.text)
+            data = json.loads(clean_text)
             for result in data.get("results", []):
                 i = result.get("index", -1)
                 if 0 <= i < len(batch):

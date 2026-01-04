@@ -4,6 +4,17 @@ from eval.models import CitedChunk, RouterPlan
 from eval.adapters.base import BaseModelAdapter, GenerationResult
 
 
+def _extract_json(text: str) -> str:
+    """Strip markdown code fences from LLM response."""
+    text = text.strip()
+    if text.startswith("```"):
+        lines = text.split("\n")
+        # Remove first line (```json) and last line (```)
+        lines = [l for l in lines if not l.strip().startswith("```")]
+        text = "\n".join(lines)
+    return text
+
+
 def route(question: str, adapter: BaseModelAdapter) -> tuple[RouterPlan, GenerationResult]:
     system_prompt = """Generate 2-3 semantic search queries for the given question.
 Return JSON: {"original_query": "<the question>", "expanded_queries": ["query1", "query2", "query3"]}
@@ -11,7 +22,8 @@ Make queries specific and varied to maximize retrieval coverage."""
 
     result = adapter.generate(question, system_prompt=system_prompt)
     try:
-        data = json.loads(result.text)
+        clean_text = _extract_json(result.text)
+        data = json.loads(clean_text)
         queries = data.get("expanded_queries", [question])
         if not queries or not isinstance(queries, list):
             queries = [question]
