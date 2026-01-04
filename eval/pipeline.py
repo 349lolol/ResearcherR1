@@ -35,6 +35,6 @@ def deduce(question: str, evidence: str, adapter: BaseModelAdapter) -> tuple[str
 Cite sources using [N] format matching the evidence numbers.
 Do not add information not in the evidence."""
 
-    prompt = f"Question: {question}\n\nEvidence:\n{evidence}"
+    prompt = f"Question: {question}\n\nEvidence: \n{evidence}"
     result = adapter.generate(prompt, system_prompt=system_prompt)
     return result.text, result

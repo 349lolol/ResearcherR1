@@ -1,4 +1,4 @@
-from eval.models import Claim, CitedChunk
+from eval.models import Claim, CitedChunk, VerificationResult
 from eval.adapters.base import BaseModelAdapter, GenerationResult
 
 import re 
@@ -46,7 +46,7 @@ def check_support(claims: list[Claim], chunks: list[CitedChunk], adapter: BaseMo
                 i = result.get("index", -1)
                 if 0 <= i < len(batch):
                     claims[start + i].supported = result.get("supported", False)
-        except json.JSONDecodeError:
+        except (json.JSONDecodeError, TypeError):
             print(f"Warning: batch {start}-{start + len(batch)} failed to parse JSON")
 
     return (claims, GenerationResult(text="", input_tokens=total_in, output_tokens=total_out))
@@ -66,3 +66,14 @@ def _build_prompt(batch: list[Claim], chunks: list[CitedChunk]) -> str:
         if  0 <= j < len(chunks):
             prompt += f"[{j}] {chunks[j].text}\n"
     return prompt
+
+def verify(
+    answer: str,
+    chunks: list[CitedChunk],
+    adapter: BaseModelAdapter
+) -> tuple[VerificationResult, GenerationResult]:
+    claims = extract_claims(answer)
+    claims, gen = check_support(claims, chunks, adapter)
+    supported_count = sum (1 for c in claims if c.supported)
+    precision = supported_count / len(claims) if claims else 0.0
+    return (VerificationResult(claims=claims, support_precision=precision), gen)
