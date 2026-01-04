@@ -1,8 +1,42 @@
+import re
+
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 from ingest.models import PageRecord
 
 from ingest.qdrant_config import CORPUS_VERSION
+
+
+def _is_low_quality(text: str, min_alpha_ratio: float = 0.3, min_words: int = 10) -> bool:
+    """Check if chunk is mostly numbers/noise (figure axes, tables, etc.)."""
+    if not text.strip():
+        return True
+
+    # Count alphabetic vs total characters
+    alpha_chars = sum(1 for c in text if c.isalpha())
+    total_chars = len(text.replace(" ", "").replace("\n", ""))
+
+    if total_chars == 0:
+        return True
+
+    alpha_ratio = alpha_chars / total_chars
+
+    # Count words (sequences of letters)
+    words = re.findall(r'[a-zA-Z]{2,}', text)
+
+    # Check for figure axis patterns (sequences of numbers)
+    number_sequences = re.findall(r'(?:\d+\s+){3,}', text)  # 3+ numbers in a row
+    has_axis_pattern = len(number_sequences) > 0
+
+    # Check for repeated short lines (common in figure text)
+    lines = [l.strip() for l in text.split('\n') if l.strip()]
+    short_lines = sum(1 for l in lines if len(l) < 30)
+    mostly_short_lines = len(lines) > 3 and short_lines / len(lines) > 0.6
+
+    return (alpha_ratio < min_alpha_ratio or
+            len(words) < min_words or
+            has_axis_pattern or
+            mostly_short_lines)
 
 class LangChainChunker:
     def __init__(
@@ -20,7 +54,7 @@ class LangChainChunker:
     def create_page_chunks(self, pages: list[PageRecord], doc_id: str) -> list[Document]:
         if not pages:
             return []
-        
+
         return [
             Document(
                 page_content=page.text,
@@ -34,6 +68,7 @@ class LangChainChunker:
                 }
             )
             for page in pages
+            if not _is_low_quality(page.text)
         ]
 
     def create_stream_chunks(self, pages: list[PageRecord], doc_id: str) -> list[Document]:
@@ -52,6 +87,8 @@ class LangChainChunker:
             page_start, page_end = self._find_page_span(chunk_start, chunk_end, boundaries)
             if page_start == -1 or page_end == -1:
                 print(f"chunk {doc_id}_stream_{i:04d} has corrupted boundaries")
+            elif _is_low_quality(chunk.page_content):
+                pass  # Skip low-quality chunks (figure axes, tables, etc.)
             else:
                 result.append(
                     Document(

@@ -47,6 +47,15 @@ def deduce(question: str, evidence: str, adapter: BaseModelAdapter) -> tuple[str
 Cite sources using [N] format matching the evidence numbers.
 Do not add information not in the evidence."""
 
-    prompt = f"Question: {question}\n\nEvidence: \n{evidence}"
+    prompt = f"Question: {question}\n\nEvidence:\n{evidence}"
+    result = adapter.generate(prompt, system_prompt=system_prompt)
+    return result.text, result
+
+
+def baseline_deduce(question: str, evidence: str, adapter: BaseModelAdapter) -> tuple[str, GenerationResult]:
+    """Standard RAG prompt - helpful assistant with sources, no strict grounding."""
+    system_prompt = """You are a knowledgeable research assistant. Answer questions clearly and thoroughly using the provided sources. Include citations [0], [1], etc. to reference which source supports each point."""
+
+    prompt = f"Question: {question}\n\nSources:\n{evidence}"
     result = adapter.generate(prompt, system_prompt=system_prompt)
     return result.text, result

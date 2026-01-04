@@ -11,7 +11,7 @@ class EvalConfig(BaseModel):
     """Evaluation settings."""
 
     # Ablation mode
-    ablation: Literal["Naive", "EFR", "EFR+Verify"] = "EFR+Verify"
+    ablation: Literal["Naive", "EFR", "EFR+Verify", "Baseline"] = "EFR+Verify"
 
     # Retrieval
     top_k: int = 10

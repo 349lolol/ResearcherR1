@@ -2,7 +2,7 @@ from langgraph.graph import StateGraph, END
 
 from eval.models import EvalState
 from eval.config import EvalConfig
-from eval.pipeline import route, build_packet, deduce
+from eval.pipeline import route, build_packet, deduce, baseline_deduce
 from eval.retrieve import retrieve
 from eval.verify import verify
 from eval.repair import repair
@@ -33,7 +33,13 @@ def build_graph(config: EvalConfig, adapter: BaseModelAdapter, indexer: QdrantIn
 
     def deduce_node(state: EvalState) -> dict:
         assert state.evidence_packet is not None
-        answer, gen = deduce(state.question, state.evidence_packet, adapter)
+
+        # Baseline uses simpler prompt, EFR/Naive use strict grounding prompt
+        if config.ablation == "Baseline":
+            answer, gen = baseline_deduce(state.question, state.evidence_packet, adapter)
+        else:
+            answer, gen = deduce(state.question, state.evidence_packet, adapter)
+
         cost = adapter.get_cost(gen.input_tokens, gen.output_tokens)
         total_tokens = state.total_tokens + gen.input_tokens + gen.output_tokens
         total_cost = state.total_cost + cost
@@ -52,9 +58,9 @@ def build_graph(config: EvalConfig, adapter: BaseModelAdapter, indexer: QdrantIn
         if verification.support_precision >= 1.0:
             return {"final_answer": answer, "verification": verification, "total_tokens": total_tokens, "total_cost": total_cost}
 
-        # EFR: fail without repair
-        if config.ablation == "EFR":
-            return {"final_answer": answer, "verification": verification, "errors": state.errors + ["Verification failed"], "total_tokens": total_tokens, "total_cost": total_cost}
+        # EFR / Baseline: return without repair
+        if config.ablation in ("EFR", "Baseline"):
+            return {"final_answer": answer, "verification": verification, "total_tokens": total_tokens, "total_cost": total_cost}
 
         # EFR+Verify: repair
         repaired, repair_gen = repair(answer, verification, state.evidence_packet, adapter)

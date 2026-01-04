@@ -1,4 +1,6 @@
 import typer
+from dotenv import load_dotenv
+load_dotenv()
 
 from eval.config import EvalConfig
 from eval.models import EvalState
