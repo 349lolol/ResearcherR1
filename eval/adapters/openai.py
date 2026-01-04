@@ -2,7 +2,9 @@
 
 import os
 
-from openai import OpenAI
+from openai import OpenAI, RateLimitError, APIError
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+
 
 from eval.adapters.base import BaseModelAdapter, GenerationResult
 
@@ -15,6 +17,11 @@ class OpenAIAdapter(BaseModelAdapter):
     def __init__(self):
         self._client = OpenAI(api_key=os.getenv("OPENAI_API_KEY")) 
 
+    @retry(
+            stop=stop_after_attempt(3),
+            wait=wait_exponential(min=1, max=60),
+            retry=retry_if_exception_type((RateLimitError, APIError))
+    )
     def generate(self, prompt: str, *, system_prompt: str | None = None) -> GenerationResult:
         messages = []
         if system_prompt:
@@ -28,6 +35,9 @@ class OpenAIAdapter(BaseModelAdapter):
         )
 
         usage = response.usage
+
+        if not response.choices:
+            return GenerationResult(text="", input_tokens=0, output_tokens=0)
         return GenerationResult(
             text=response.choices[0].message.content or "",
             input_tokens=usage.prompt_tokens or 0 if usage else 0,
