@@ -1,16 +1,6 @@
 from eval.models import VerificationResult
 from eval.adapters.base import BaseModelAdapter, GenerationResult
-
-
-REPAIR_SYSTEM_PROMPT = """You are a claim repair assistant. Revise the answer to remove or soften unsupported claims.
-
-Rules:
-- Keep all supported claims unchanged
-- Remove unsupported factual claims, or soften them (e.g., "X is true" → "X may be true")
-- Maintain the answer's structure and flow
-- Keep all valid citations [N]
-
-Return only the revised answer text."""
+from eval.prompts import REPAIR_SYSTEM_PROMPT
 
 
 def repair(answer: str, verification: VerificationResult, evidence: str, adapter: BaseModelAdapter) -> tuple[str, GenerationResult]:

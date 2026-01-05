@@ -1,8 +1,9 @@
-from eval.models import Claim, CitedChunk, VerificationResult
-from eval.adapters.base import BaseModelAdapter, GenerationResult
-
 import re
 import json
+
+from eval.models import Claim, CitedChunk, VerificationResult
+from eval.adapters.base import BaseModelAdapter, GenerationResult
+from eval.prompts import VERIFY_SYSTEM_PROMPT
 
 
 BATCH_SIZE = 5
@@ -16,14 +17,6 @@ def _extract_json(text: str) -> str:
         lines = [line for line in lines if not line.strip().startswith("```")]
         text = "\n".join(lines)
     return text
-
-VERIFY_SYSTEM_PROMPT = """You are a claim verification assistant. For each sentence, determine if it is supported.
-
-Rules:
-- For sentences WITH citations [N]: Check if the cited evidence supports the claim. Mark supported=true only if the evidence directly supports it.
-- For sentences WITHOUT citations: If structural/transitional (e.g., "Let me explain", "There are three reasons"), mark supported=true. If factual assertion without citation, mark supported=false.
-
-Return JSON only: {"results": [{"index": 0, "supported": true}, {"index": 1, "supported": false}, ...]}"""
 
 def extract_claims(answer: str) -> list[Claim]:
     sentences = re.split(r'(?<=[.!?])\s+', answer)
@@ -47,7 +40,7 @@ def extract_claims(answer: str) -> list[Claim]:
 
 def check_support(claims: list[Claim], chunks: list[CitedChunk], adapter: BaseModelAdapter) -> tuple[list[Claim], GenerationResult]:
     total_in, total_out = 0, 0
-    
+
     for start in range(0, len(claims), BATCH_SIZE):
         batch = claims[start:start + BATCH_SIZE]
         prompt = _build_prompt(batch, chunks)

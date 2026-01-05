@@ -1,0 +1,7 @@
+# Ignore all files in data/sources
+*
+# But keep this .gitignore file
+!.gitignore
+
+#Todays Data: collected at 6:24 am waterloo time on Monday, January 5
+#Taking first 150 entries appearing in feed, then filtering titles for substring "agent"
