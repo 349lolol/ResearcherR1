@@ -1,6 +1,6 @@
 import re
 
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 from ingest.models import PageRecord
 
@@ -43,12 +43,21 @@ class LangChainChunker:
         self,
         chunk_size: int = 400,
         chunk_overlap: int = 100,
-        ) -> None:
-        self.splitter = RecursiveCharacterTextSplitter(
-            chunk_size = chunk_size * 4,
-            chunk_overlap = chunk_overlap * 4,
-            separators = ["\n\n", "\n", ". ", " ", ""],
-            add_start_index = True
+    ) -> None:
+        # Split on markdown headers first
+        self.header_splitter = MarkdownHeaderTextSplitter(
+            headers_to_split_on=[
+                ("#", "h1"),
+                ("##", "h2"),
+                ("###", "h3"),
+            ],
+            strip_headers=False,  # Keep headers in content
+        )
+        # Then split large sections by character
+        self.char_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=chunk_size * 4,
+            chunk_overlap=chunk_overlap * 4,
+            separators=["\n\n", "\n", ". ", " ", ""],
         )
 
     def create_page_chunks(self, pages: list[PageRecord], doc_id: str) -> list[Document]:
@@ -74,35 +83,40 @@ class LangChainChunker:
     def create_stream_chunks(self, pages: list[PageRecord], doc_id: str) -> list[Document]:
         if not pages:
             return []
-        
+
         full_text = "\n\n".join(page.text for page in pages)
-        chunks = self.splitter.create_documents([full_text])
-        boundaries = self._compute_page_boundaries(pages)
 
+        # First: split by headers
+        header_chunks = self.header_splitter.split_text(full_text)
+
+        # Second: split large header chunks by character
+        final_chunks = self.char_splitter.split_documents(header_chunks)
+
+        # Build result with metadata
         result = []
-        for i, chunk in enumerate(chunks):
-            chunk_start = chunk.metadata.get('start_index', 0)
-            chunk_end = chunk_start + len(chunk.page_content)
+        for i, chunk in enumerate(final_chunks):
+            if _is_low_quality(chunk.page_content):
+                continue
 
-            page_start, page_end = self._find_page_span(chunk_start, chunk_end, boundaries)
-            if page_start == -1 or page_end == -1:
-                print(f"chunk {doc_id}_stream_{i:04d} has corrupted boundaries")
-            elif _is_low_quality(chunk.page_content):
-                pass  # Skip low-quality chunks (figure axes, tables, etc.)
-            else:
-                result.append(
-                    Document(
-                        page_content = chunk.page_content,
-                        metadata={
-                            "chunk_id": f"{doc_id}_stream_{i:04d}",
-                            "doc_id": doc_id,
-                            "chunk_type": "STREAM",
-                            "page_start": page_start,
-                            "page_end": page_end,
-                            "corpus_version": CORPUS_VERSION
-                        }
-                    )
-                )
+            # Extract header metadata
+            h1 = chunk.metadata.get("h1", "")
+            h2 = chunk.metadata.get("h2", "")
+            h3 = chunk.metadata.get("h3", "")
+
+            result.append(Document(
+                page_content=chunk.page_content,
+                metadata={
+                    "chunk_id": f"{doc_id}_stream_{i:04d}",
+                    "doc_id": doc_id,
+                    "chunk_type": "STREAM",
+                    "page_start": -1,  # Header-based, not page-based
+                    "page_end": -1,
+                    "h1": h1,
+                    "h2": h2,
+                    "h3": h3,
+                    "corpus_version": CORPUS_VERSION
+                }
+            ))
         return result
 
     def _compute_page_boundaries(self, pages: list[PageRecord]) -> list[dict]:
