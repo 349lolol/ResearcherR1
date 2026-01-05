@@ -1,5 +1,7 @@
 from langchain_qdrant import QdrantVectorStore
 from langchain_core.documents import Document
+from langchain_community.retrievers import BM25Retriever
+from langchain_classic.retrievers import EnsembleRetriever
 from ingest.qdrant_config import QdrantConfig
 from ingest.langchain_embeddings import GeminiEmbeddings
 from qdrant_client.models import Filter, FieldCondition, MatchValue
@@ -20,6 +22,8 @@ class QdrantIndexer:
             embedding=self.embeddings.get_langchain_embeddings()
         )
         self._ensure_corpus_version()
+        self._bm25_retriever = None
+        self._all_docs_cache = None
 
     
     def add_documents(self, documents: list[Document], batch_size: int = 100) -> list[str]:
@@ -113,3 +117,67 @@ class QdrantIndexer:
                 print(f"Corpus version mismatch ({stored_version} != {CORPUS_VERSION}), wiping collection")
                 self.client.delete_collection(self.config.collection_name)
                 self.config.create_collection(self.client)
+
+    def _load_all_documents(self) -> list[Document]:
+        """Load ALL documents from Qdrant using paginated scroll."""
+        if self._all_docs_cache is not None:
+            return self._all_docs_cache
+
+        all_docs = []
+        offset = None
+
+        while True:
+            points, next_offset = self.client.scroll(
+                collection_name=self.config.collection_name,
+                limit=100,
+                offset=offset,
+                with_payload=True,
+                with_vectors=False
+            )
+
+            for point in points:
+                if point.payload:
+                    metadata = point.payload.get("metadata", {})
+                    page_content = point.payload.get("page_content", "")
+                    all_docs.append(Document(
+                        page_content=page_content,
+                        metadata=metadata
+                    ))
+
+            if next_offset is None:
+                break
+            offset = next_offset
+
+        self._all_docs_cache = all_docs
+        print(f"Loaded {len(all_docs)} documents for BM25 index")
+        return all_docs
+
+    def _get_bm25_retriever(self, k: int = 10) -> BM25Retriever | None:
+        """Lazy-load BM25 index from all Qdrant documents."""
+        if self._bm25_retriever is None:
+            all_docs = self._load_all_documents()
+            if not all_docs:
+                return None
+            self._bm25_retriever = BM25Retriever.from_documents(all_docs)
+        self._bm25_retriever.k = k
+        return self._bm25_retriever
+
+    def hybrid_search(self, query: str, top_k: int = 10, bm25_weight: float = 0.5) -> list[tuple[Document, float]]:
+        """Ensemble search combining BM25 + vector via RRF."""
+        bm25_retriever = self._get_bm25_retriever(k=top_k)
+
+        # Fallback to vector-only if no documents for BM25
+        if bm25_retriever is None:
+            return self.search(query, top_k)
+
+        qdrant_retriever = self.vector_store.as_retriever(search_kwargs={"k": top_k})
+
+        ensemble = EnsembleRetriever(
+            retrievers=[bm25_retriever, qdrant_retriever],
+            weights=[bm25_weight, 1 - bm25_weight]
+        )
+
+        docs = ensemble.invoke(query)
+        # RRF doesn't produce probability scores - use 1.0 for all
+        # Rank order is preserved by list position
+        return [(doc, 1.0) for doc in docs[:top_k]]

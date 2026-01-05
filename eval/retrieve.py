@@ -1,10 +1,13 @@
 from eval.models import CitedChunk
 from ingest.qdrant_indexer import QdrantIndexer
 
-def retrieve(queries: list[str], top_k: int, indexer: QdrantIndexer) -> list[CitedChunk]:
+def retrieve(queries: list[str], top_k: int, indexer: QdrantIndexer, hybrid: bool = True) -> list[CitedChunk]:
     responses = []
     for query in queries:
-        response = indexer.search(query, top_k)
+        if hybrid:
+            response = indexer.hybrid_search(query, top_k)
+        else:
+            response = indexer.search(query, top_k)
         responses.append(response)
 
     deduped_chunks = {}

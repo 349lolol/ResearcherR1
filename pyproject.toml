@@ -10,6 +10,7 @@ dependencies = [
     "hnswlib>=0.8.0",
     "httpx>=0.28.1",
     "langchain>=0.3.15",
+    "langchain-community>=0.3.15",
     "langchain-core>=0.3.28",
     "langchain-google-genai>=2.1.7",
     "langchain-qdrant>=0.2.0",
@@ -29,6 +30,7 @@ dependencies = [
     "typer>=0.21.0",
     "google-api-core>=2.28.1",
     "pymupdf4llm>=0.2.7",
+    "rank-bm25>=0.2.2",
 ]
 
 [dependency-groups]

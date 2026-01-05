@@ -24,7 +24,7 @@ def build_graph(config: EvalConfig, adapter: BaseModelAdapter, indexer: QdrantIn
 
     def retrieve_node(state: EvalState) -> dict:
         assert state.router_plan is not None
-        chunks = retrieve(state.router_plan.expanded_queries, config.top_k, indexer)
+        chunks = retrieve(state.router_plan.expanded_queries, config.top_k, indexer, config.hybrid_search)
         return {"retrieved_chunks": chunks}
 
     def packet_node(state: EvalState) -> dict:

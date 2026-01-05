@@ -30,8 +30,9 @@ def ask(
     model: str = typer.Option("openai", help="Model: openai, gemini, or local"),
     top_k: int = typer.Option(10, help="Number of chunks to retrieve", min=1, max=50),
     ablation: str = typer.Option("Naive", help="Mode: Naive, EFR, or EFR+Verify"),
+    hybrid: bool = typer.Option(True, "--hybrid/--no-hybrid", help="Enable BM25 hybrid search"),
 ):
-    config = EvalConfig(top_k=top_k, ablation=ablation)
+    config = EvalConfig(top_k=top_k, ablation=ablation, hybrid_search=hybrid)
     adapter = get_adapter(model)
     indexer = QdrantIndexer()
 
@@ -39,6 +40,7 @@ def ask(
     print(f"Model: {model}")
     print(f"Top-k: {top_k}")
     print(f"Ablation: {ablation}")
+    print(f"Hybrid search: {hybrid}")
     print("-" * 40)
 
     pipeline = build_graph(config, adapter, indexer)

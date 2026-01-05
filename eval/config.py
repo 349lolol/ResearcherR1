@@ -15,6 +15,7 @@ class EvalConfig(BaseModel):
 
     # Retrieval
     top_k: int = 10
+    hybrid_search: bool = True
 
     # Verification
     max_repair_cycles: int = 1
