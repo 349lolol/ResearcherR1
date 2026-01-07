@@ -4,6 +4,7 @@ from pathlib import Path
 import typer
 
 from ingest.cleanup import clean_pages
+from ingest.context_labeler import ContextLabeler
 from ingest.extractors.pdf import extract_pdf
 from ingest.langchain_chunker import LangChainChunker
 from ingest.qdrant_indexer import QdrantIndexer
@@ -129,6 +130,10 @@ def _process_doc(
         cleaned_pages = clean_pages(pages)
 
         stream_chunks = chunker.create_stream_chunks(cleaned_pages, doc_id)
+
+        labeler = ContextLabeler()
+        stream_chunks = labeler.label_chunks(stream_chunks, doc_id)
+
         page_chunks = chunker.create_page_chunks(cleaned_pages, doc_id)
         all_chunks = stream_chunks + page_chunks
 
