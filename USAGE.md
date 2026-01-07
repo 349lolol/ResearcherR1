@@ -32,7 +32,7 @@ uv run python -m ingest.cli list-docs
 
 ### 3. Ask Questions
 ```bash
-# Basic query (uses EFR+Verify by default)
+# Basic query (uses Naive mode by default)
 uv run python -m eval.cli "What methods are used for X?"
 
 # Specify model
@@ -95,9 +95,14 @@ Question: How does X work?
 Model: gemini
 Top-k: 10
 Ablation: EFR
+Hybrid search: True
 ----------------------------------------
 Answer:
 X works by doing Y [0] and Z [3]...
+
+Sources:
+[0] arxiv_2512.23880v1, pp. 5-6
+[3] arxiv_2512.24873v1, p. 12
 ----------------------------------------
 Chunks retrieved: 10
 Queries expanded: 3
@@ -106,6 +111,7 @@ Total cost: $0.0005
 Verification: 85.7% (6/7 claims)
 ```
 
+- **Sources**: Maps citation indices to document IDs and page numbers
 - **Chunks retrieved**: Number of evidence chunks used
 - **Queries expanded**: Router generated N search queries
 - **Verification**: % of claims supported by cited evidence
@@ -138,10 +144,10 @@ QDRANT_COLLECTION=researcher_chunks
 
 # Models (defaults shown)
 OPENAI_MODEL=gpt-4o
-GEMINI_MODEL=gemini-2.0-flash
+GEMINI_MODEL=gemini-2.5-flash
 
 # Corpus version (bump to force re-index)
-CORPUS_VERSION=5
+CORPUS_VERSION=9
 ```
 
 ## Troubleshooting
