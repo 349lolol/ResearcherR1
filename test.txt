@@ -1,0 +1,19 @@
+RAG Pipeline benchmark:
+
+#	Question	Verification
+1	PPO training in multi-agent systems	100% (8/8)
+2	Memory representations for spatial reasoning	100% (4/4)
+3	RIS improving NOMA with DRL	100% (7/7)
+4	Connecting LLMs with massive APIs	87.5% (7/8)
+Overall: 26/27 claims verified (96.3%)
+
+AI Graded benchmark:
+All documents uploaded to gemini flash 2.5 in ai studio
+Then 4 questions were asked sequentially
+responses copied to chat with gemini flash 3.0 preview with documents
+gemini flash 3.0 asked to mark output
+Sentence Count Summary:
+Supported Claims: 71
+Unsupported Claims: 20
+
+Overall: 78.0%
