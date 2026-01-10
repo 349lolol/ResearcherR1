@@ -144,7 +144,7 @@ QDRANT_COLLECTION=researcher_chunks
 
 # Models (defaults shown)
 OPENAI_MODEL=gpt-4o
-GEMINI_MODEL=gemini-2.5-flash
+GEMINI_MODEL=gemini-2.5-flash  # or gemini-2.0-flash
 
 # Corpus version (bump to force re-index)
 CORPUS_VERSION=9
