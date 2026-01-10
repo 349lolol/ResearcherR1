@@ -1,5 +1,3 @@
-"""Abstract base class for LLM adapters."""
-
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 

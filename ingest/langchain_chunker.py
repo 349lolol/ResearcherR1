@@ -8,27 +8,17 @@ from ingest.qdrant_config import CORPUS_VERSION
 
 
 def _is_low_quality(text: str, min_alpha_ratio: float = 0.3, min_words: int = 10) -> bool:
-    """Check if chunk is mostly numbers/noise (figure axes, tables, etc.)."""
     if not text.strip():
         return True
-
-    # Count alphabetic vs total characters
     alpha_chars = sum(1 for c in text if c.isalpha())
     total_chars = len(text.replace(" ", "").replace("\n", ""))
 
     if total_chars == 0:
         return True
-
     alpha_ratio = alpha_chars / total_chars
-
-    # Count words (sequences of letters)
     words = re.findall(r'[a-zA-Z]{2,}', text)
-
-    # Check for figure axis patterns (sequences of numbers)
-    number_sequences = re.findall(r'(?:\d+\s+){3,}', text)  # 3+ numbers in a row
+    number_sequences = re.findall(r'(?:\d+\s+){3,}', text)
     has_axis_pattern = len(number_sequences) > 0
-
-    # Check for repeated short lines (common in figure text)
     lines = [l.strip() for l in text.split('\n') if l.strip()]
     short_lines = sum(1 for l in lines if len(l) < 30)
     mostly_short_lines = len(lines) > 3 and short_lines / len(lines) > 0.6
@@ -44,16 +34,14 @@ class LangChainChunker:
         chunk_size: int = 400,
         chunk_overlap: int = 100,
     ) -> None:
-        # Split on markdown headers first
         self.header_splitter = MarkdownHeaderTextSplitter(
             headers_to_split_on=[
                 ("#", "h1"),
                 ("##", "h2"),
                 ("###", "h3"),
             ],
-            strip_headers=False,  # Keep headers in content
+            strip_headers=False,
         )
-        # Then split large sections by character
         self.char_splitter = RecursiveCharacterTextSplitter(
             chunk_size=chunk_size * 4,
             chunk_overlap=chunk_overlap * 4,
@@ -85,20 +73,13 @@ class LangChainChunker:
             return []
 
         full_text = "\n\n".join(page.text for page in pages)
-
-        # First: split by headers
         header_chunks = self.header_splitter.split_text(full_text)
-
-        # Second: split large header chunks by character
         final_chunks = self.char_splitter.split_documents(header_chunks)
 
-        # Build result with metadata
         result = []
         for i, chunk in enumerate(final_chunks):
             if _is_low_quality(chunk.page_content):
                 continue
-
-            # Extract header metadata
             h1 = chunk.metadata.get("h1", "")
             h2 = chunk.metadata.get("h2", "")
             h3 = chunk.metadata.get("h3", "")
@@ -109,7 +90,7 @@ class LangChainChunker:
                     "chunk_id": f"{doc_id}_stream_{i:04d}",
                     "doc_id": doc_id,
                     "chunk_type": "STREAM",
-                    "page_start": -1,  # Header-based, not page-based
+                    "page_start": -1,
                     "page_end": -1,
                     "h1": h1,
                     "h2": h2,

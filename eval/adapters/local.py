@@ -1,5 +1,3 @@
-"""Local LLM adapter for LM Studio (OpenAI-compatible API)."""
-
 import os
 
 from openai import OpenAI, RateLimitError, APIError

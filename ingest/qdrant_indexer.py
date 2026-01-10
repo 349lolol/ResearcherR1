@@ -103,7 +103,6 @@ class QdrantIndexer:
         return doc_ids
     
     def _ensure_corpus_version(self):
-        #compare first chunk version against .env
         points, _ = self.client.scroll(
             collection_name = self.config.collection_name,
             limit = 1,
@@ -119,7 +118,6 @@ class QdrantIndexer:
                 self.config.create_collection(self.client)
 
     def _load_all_documents(self) -> list[Document]:
-        """Load ALL documents from Qdrant using paginated scroll."""
         if self._all_docs_cache is not None:
             return self._all_docs_cache
 
@@ -153,7 +151,6 @@ class QdrantIndexer:
         return all_docs
 
     def _get_bm25_retriever(self, k: int = 10) -> BM25Retriever | None:
-        """Lazy-load BM25 index from all Qdrant documents."""
         if self._bm25_retriever is None:
             all_docs = self._load_all_documents()
             if not all_docs:
@@ -163,10 +160,7 @@ class QdrantIndexer:
         return self._bm25_retriever
 
     def hybrid_search(self, query: str, top_k: int = 10, bm25_weight: float = 0.5) -> list[tuple[Document, float]]:
-        """Ensemble search combining BM25 + vector via RRF."""
         bm25_retriever = self._get_bm25_retriever(k=top_k)
-
-        # Fallback to vector-only if no documents for BM25
         if bm25_retriever is None:
             return self.search(query, top_k)
 
@@ -178,6 +172,4 @@ class QdrantIndexer:
         )
 
         docs = ensemble.invoke(query)
-        # RRF doesn't produce probability scores - use 1.0 for all
-        # Rank order is preserved by list position
         return [(doc, 1.0) for doc in docs[:top_k]]

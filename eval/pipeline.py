@@ -6,7 +6,6 @@ from eval.prompts import ROUTER_SYSTEM_PROMPT, EFR_DEDUCE_SYSTEM_PROMPT, BASELIN
 
 
 def _extract_json(text: str) -> str:
-    """Strip markdown code fences from LLM response."""
     text = text.strip()
     if text.startswith("```"):
         lines = text.split("\n")
@@ -45,7 +44,6 @@ def deduce(question: str, evidence: str, adapter: BaseModelAdapter) -> tuple[str
 
 
 def baseline_deduce(question: str, evidence: str, adapter: BaseModelAdapter) -> tuple[str, GenerationResult]:
-    """Standard RAG prompt - helpful assistant with sources, no strict grounding."""
     prompt = f"Question: {question}\n\nSources:\n{evidence}"
     result = adapter.generate(prompt, system_prompt=BASELINE_DEDUCE_SYSTEM_PROMPT)
     return result.text, result

@@ -10,7 +10,6 @@ BATCH_SIZE = 5
 
 
 def _extract_json(text: str) -> str:
-    """Strip markdown code fences from LLM response."""
     text = text.strip()
     if text.startswith("```"):
         lines = text.split("\n")
@@ -22,8 +21,6 @@ def extract_claims(answer: str) -> list[Claim]:
     sentences = re.split(r'(?<=[.!?])\s+', answer)
     references = []
     for i, sentence in enumerate(sentences):
-        # Match both [0] [1] and [0, 1] citation formats
-        # Find all bracketed content, then extract numbers from within
         brackets = re.findall(r'\[([^\]]+)\]', sentence)
         nums = []
         for bracket in brackets:

@@ -1,5 +1,3 @@
-"""Gemini adapter for gemini-3-flash."""
-
 import os
 
 from google import genai

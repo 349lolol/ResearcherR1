@@ -1,5 +1,4 @@
 def main():
-    """Main entry point for ResearcherR1 CLI."""
     import typer
     from ingest.cli import app as ingest_app
     from eval.cli import app as eval_app

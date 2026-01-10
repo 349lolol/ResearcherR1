@@ -10,8 +10,6 @@ load_dotenv()
 CORPUS_VERSION = int(os.getenv("CORPUS_VERSION", "1"))
 
 class QdrantConfig(BaseModel):
-    """Qdrant connection configuration."""
-
     mode: Literal["docker", "embedded", "memory"] = Field(
         default_factory=lambda: os.getenv("QDRANT_MODE", "docker")
     ) #type: ignore
@@ -37,15 +35,6 @@ class QdrantConfig(BaseModel):
         use_enum_values = True
 
     def get_client(self) -> QdrantClient:
-        """
-        Create Qdrant client based on mode.
-
-        Returns:
-            Configured QdrantClient instance
-
-        Raises:
-            ValueError: If mode is invalid
-        """
         if self.mode == "memory":
             return QdrantClient(":memory:")
         elif self.mode == "embedded":
@@ -62,12 +51,6 @@ class QdrantConfig(BaseModel):
             raise ValueError(f"Invalid mode: {self.mode}. Must be 'docker', 'embedded', or 'memory'")
 
     def create_collection(self, client: QdrantClient) -> None:
-        """
-        Create collection if it doesn't exist.
-
-        Args:
-            client: QdrantClient instance
-        """
         if not client.collection_exists(self.collection_name):
             client.create_collection(
                 collection_name=self.collection_name,

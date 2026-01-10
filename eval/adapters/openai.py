@@ -1,5 +1,3 @@
-"""OpenAI adapter for gpt-5."""
-
 import os
 
 from openai import OpenAI, RateLimitError, APIError

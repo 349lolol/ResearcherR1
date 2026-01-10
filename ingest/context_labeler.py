@@ -1,5 +1,3 @@
-"""LLM-based contextual labeling for chunks."""
-
 import asyncio
 import os
 
@@ -29,7 +27,6 @@ class ContextLabeler:
         retry=retry_if_exception_type((ResourceExhausted, GoogleAPIError))
     )
     async def _generate_context_async(self, chunk_text: str) -> str:
-        """Generate context for a single chunk asynchronously."""
         response = await self._client.aio.models.generate_content(
             model=self._model,
             contents=CONTEXT_PROMPT.format(chunk_text=chunk_text[:1500]),
@@ -38,15 +35,11 @@ class ContextLabeler:
         return response.text.strip() if response.text else ""
 
     async def _process_batch(self, chunks: list[Document]) -> list[str]:
-        """Process a batch of chunks concurrently."""
         tasks = [self._generate_context_async(c.page_content) for c in chunks]
         results = await asyncio.gather(*tasks, return_exceptions=True)
-        # Convert exceptions to empty strings
         return [r if isinstance(r, str) else "" for r in results]
 
     def label_chunks(self, chunks: list[Document], doc_id: str) -> list[Document]:
-        """Label all chunks with context, processing in batches."""
-
         async def _run():
             all_contexts = []
             for i in range(0, len(chunks), self._batch_size):
@@ -57,8 +50,6 @@ class ContextLabeler:
             return all_contexts
 
         contexts = asyncio.run(_run())
-
-        # Build labeled documents
         result = []
         for chunk, context in zip(chunks, contexts):
             h1 = chunk.metadata.get("h1", "")
