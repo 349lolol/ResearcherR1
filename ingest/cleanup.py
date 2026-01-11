@@ -25,6 +25,7 @@ def clean_pages(pages: list[PageRecord]) -> list[PageRecord]:
         text = re.sub(r"^\s*\d+\s*$", "", text, flags=re.MULTILINE)  # page numbers
         text = re.sub(r"\\[a-zA-Z]+\{([^}]*)\}", r"\1", text)  # latex commands
         text = re.sub(r"\\[a-zA-Z]+", "", text)  # latex remnants
+        text = re.sub(r"\[(\d+(?:,\s*\d+)*)\]", "", text)  # source citations [1], [2,3]
         text = _normalize_whitespace(text)
 
         cleaned.append(PageRecord(doc_id=page.doc_id, page=page.page, text=text))

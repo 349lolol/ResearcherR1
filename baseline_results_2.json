@@ -1,0 +1,1258 @@
+{
+  "config": {
+    "model": "gemini-2.5-flash",
+    "method": "naive_rag",
+    "description": "No EFR prompting, no citations, verified post-hoc",
+    "top_k": 10
+  },
+  "summary": {
+    "total_questions": 95,
+    "successful": 95,
+    "failed": 0,
+    "total_time_s": 964.82,
+    "avg_latency_s": 10.16,
+    "avg_support_precision": 0.102,
+    "total_claims": 752,
+    "total_supported": 94,
+    "overall_support_precision": 0.125,
+    "total_input_tokens": 377606,
+    "total_output_tokens": 33122
+  },
+  "results": [
+    {
+      "id": 1,
+      "question": "What is CASCADE and how does it enable LLM agents to acquire new skills?",
+      "answer": "CASCADE, which stands for \"Cumulative Agentic Skill Creation through Autonomous Development and Evolution,\" is a self-evolving agentic framework designed to transition LLM agents from merely using predefined tools to actively acquiring and mastering skills. It aims to cultivate and accumulate executable scientific skills, moving towards scalable AI-assisted scientific research.\n\nCASCADE enables LLM agents to acquire new skills primarily through two meta-skills:\n1.  **Continuous learning:** This involves processes like web search and code extraction.\n2.  **Self-reflection:** This is achieved through introspection and knowledge graph exploration.\n\nAdditionally, CASCADE's skill acquisition and evolution are significantly enhanced by:\n*   **Human-agent collaboration:** It is designed to identify areas requiring clarification or guidance from human scientists and can even detect inconsistencies in human-posed questions, leading to more rapid and robust evolution.\n*   **Memory capabilities:** It effectively stores information and retrieves relevant memories, allowing it to tackle more advanced queries and accumulate skills over time.",
+      "tokens": {
+        "input": 2759,
+        "output": 359
+      },
+      "latency_s": 14.72,
+      "support_precision": 0.125,
+      "claims_total": 8,
+      "claims_supported": 1
+    },
+    {
+      "id": 2,
+      "question": "How does SPARK implement persona-based agents for personalized search?",
+      "answer": "SPARK implements persona-based agents for personalized search through a multi-agent framework with the following key mechanisms:\n\n1.  **Persona Formalism:** SPARK defines a \"persona space\" where agents are characterized along multiple facets:\n    *   **Role:** Such as \"Critic\" or \"Synthesizer.\"\n    *   **Expertise:** Focusing on specific subject matters.\n    *   **Task Context:** Related to the type of user goal.\n    *   **Domain:** The area of knowledge.\n    This formalization allows for fine-grained specialization of search behavior.\n\n2.  **Persona Coordinator:** A central Persona Coordinator dynamically interprets incoming queries in context. It then activates the most relevant specialized persona agents based on this interpretation.\n\n3.  **Individual Agent Operation:** Each activated agent executes an independent retrieval-augmented generation (RAG) process. These agents are supported by:\n    *   Dedicated long- and short-term memory stores.\n    *   Context-aware reasoning modules.\n\n4.  **Inter-Agent Collaboration:** Structured communication protocols facilitate collaboration among agents. These protocols include:\n    *   Shared memory repositories.\n    *   Iterative debate.\n    *   Relay-style knowledge transfer, where one agent builds on the output of a previous one.\n    *   Agents can also operate as independent specialists whose results are later fused.\n\nThis coordinated process among persona-specialized, retrieval-augmented agents operating over layered memory enables SPARK to deliver task-specific retrieval and emergent personalization, adapting to users' evolving information needs.",
+      "tokens": {
+        "input": 4225,
+        "output": 730
+      },
+      "latency_s": 16.18,
+      "support_precision": 0.10526315789473684,
+      "claims_total": 19,
+      "claims_supported": 2
+    },
+    {
+      "id": 3,
+      "question": "What is the ROAD framework and how does it optimize prompts without gold-standard datasets?",
+      "answer": "The ROAD (Reflective Optimization via Automated Debugging) framework is a novel approach for automated prompt debugging and zero-shot agent alignment. It utilizes a multi-agent Large Language Model (LLM) pipeline to build robust, self-correcting agents, particularly in data-scarce environments. Unlike conventional methods that often rely on unstructured natural language prompts, ROAD shifts its output format to structured **Decision Tree Protocols** to enforce strict sequencing and safety guardrails, thereby reducing hallucination and logic errors. The framework views optimization as a dynamic debugging investigation, automating the role of a lead engineer.\n\nROAD optimizes prompts **without gold-standard datasets** by fundamentally changing the source of its learning signal. While standard optimization methods, like GEPA, rely on curated, \"gold-standard\" datasets or fixed reward signals to evaluate prompt fitness, ROAD operates on the premise that **high-entropy production failures offer a higher-density learning signal than successful executions.**\n\nIts optimization process involves a human-like debugging loop:\n1.  An agent (the Contestant) executes tasks.\n2.  When failures occur, these \"messy\" raw failure logs are filtered.\n3.  A multi-agent architecture, specifically an Analyzer, diagnoses the root causes of these failures.\n4.  An Optimizer then synthesizes a Decision Tree Protocol based on the identified logic gaps and root causes.\n5.  Finally, a Coach updates the agent's core instructions or system prompt based on these policy-guided rewrites derived from the debugging process.\n\nThis systematic evolution of instructions, driven by the analysis of real-world failures rather than pre-labeled data, allows ROAD to achieve significant performance gains with high sample efficiency in data-scarce settings.",
+      "tokens": {
+        "input": 3574,
+        "output": 561
+      },
+      "latency_s": 17.0,
+      "support_precision": 0.25,
+      "claims_total": 16,
+      "claims_supported": 4
+    },
+    {
+      "id": 4,
+      "question": "What is the Science Context Protocol (SCP) and what are its two foundational pillars?",
+      "answer": "The Science Context Protocol (SCP) is an open-source standard and a unified framework designed to accelerate scientific discovery. It achieves this by establishing a standardized connectivity framework that enables efficient, secure, and context-aware interaction and collaboration between discovery-oriented applications, external research assets (such as laboratory instruments, databases, knowledge repositories, LLMs, computational models, tools, and APIs), researchers, and autonomous scientific agents. SCP aims to foster a hybrid dry-wet, multi-institution collaborative research paradigm, enabling a global web of autonomous scientific agents.\n\nIts two foundational pillars are:\n\n1.  **Unified Resource Integration:** SCP provides a universal specification for describing and invoking scientific resources, including software tools, models, datasets, and physical instruments. This standardization allows AI agents and applications to seamlessly discover, call, and compose capabilities across different platforms and institutional boundaries.\n2.  **Orchestrated Experiment Lifecycle Management:** SCP complements the protocol with a secure service architecture, consisting of a centralized SCP Hub and federated SCP Servers. This architecture manages the entire experiment lifecycle (from registration and planning through execution, monitoring, and archival), enforces authentication and authorization, and orchestrates traceable, end-to-end workflows that connect computational and physical laboratories.",
+      "tokens": {
+        "input": 4515,
+        "output": 463
+      },
+      "latency_s": 9.45,
+      "support_precision": 0.2222222222222222,
+      "claims_total": 9,
+      "claims_supported": 2
+    },
+    {
+      "id": 5,
+      "question": "How do belief-guided agents perform exploratory inference under partial observability?",
+      "answer": "Based on the provided excerpts, belief-guided agents perform exploratory inference under partial observability by:\n\n1.  **Maintaining a structured belief:** They maintain an external structured belief over the environment state.\n2.  **Iterative belief refinement:** This belief is iteratively updated via action-conditioned observations.\n3.  **Action selection for information gain:** Actions are selected by maximizing predicted information gain over the belief space.\n4.  **Information gain estimation:** A lightweight LLM-based surrogate is used to estimate this information gain.\n5.  **World alignment assessment:** They assess world alignment through a novel reward that quantifies the consistency between the posterior belief and the ground-truth environment configuration.\n\nThis approach views exploratory decision making as an approximate Bayes-adaptive control problem, where the agent maintains a posterior over latent environment configurations and selects actions that trade off task reward and information gain in belief space. This is achieved through posterior-guided belief refinement without relying on gradient-based updates or additional training for the LLM agent.",
+      "tokens": {
+        "input": 1979,
+        "output": 364
+      },
+      "latency_s": 11.03,
+      "support_precision": 0.25,
+      "claims_total": 12,
+      "claims_supported": 3
+    },
+    {
+      "id": 6,
+      "question": "How do foundation model agents explore and reason in map environments?",
+      "answer": "Foundation model (FM) agents explore map environments incrementally by navigating partially observable grid-based maps, which consist of roads, intersections, and points of interest (POIs). At each step, they receive only local observations.\n\nTheir reasoning and spatial understanding are then evaluated using a suite of tasks, including direction judgment, distance estimation, proximity judgment, POI density recognition, and path planning. The process involves systematically varying exploration strategies, memory representations, and reasoning schemes (such as prompting methods) to understand their distinct functional roles and how they influence spatial understanding. This approach shifts the focus from static map interpretation to interactive, experience-based spatial reasoning.",
+      "tokens": {
+        "input": 2788,
+        "output": 192
+      },
+      "latency_s": 7.56,
+      "support_precision": 0.0,
+      "claims_total": 5,
+      "claims_supported": 0
+    },
+    {
+      "id": 7,
+      "question": "What is MCPAgentBench and how does it evaluate LLM agent tool use capabilities?",
+      "answer": "MCPAgentBench is a new, real-world task benchmark designed to evaluate the efficiency and robustness of LLM agents in selecting and using tools to complete tasks. It focuses on a fine-grained, decision-centric aspect of tool use, emphasizing task completion efficiency, task authenticity, and robustness to interference, going beyond mere correctness.\n\nMCPAgentBench evaluates LLM agent tool use capabilities through the following framework:\n\n1.  **Environment:** It employs an Autogen-based sandbox with locally maintained MCP servers, ensuring stable and reproducible execution.\n2.  **Tasks:** It uses a diverse collection of real-world tasks, meticulously reviewed and curated to ensure each task has a unique solution.\n3.  **Tool Collection:** It utilizes authentic definitions and parameters of MCP tools, building simulated MCP servers that strictly follow standard protocols.\n4.  **Distractor Tools:** For each task, it presents the agent with a dynamic candidate list of tools (`L`) that includes both the correct tools (`G`) and \"distractor tools\" (`F`) that are functionally unrelated or easily confused. This tests the agent's robustness in tool selection.\n5.  **Agent Interaction:** The LLM agent under test must interpret the given task (`T`), select the correct tool(s) from the distractor-filled list (`L`), and generate compliant call parameters.\n6.  **Automated Evaluation:** The Autogen framework manages the agent-tool interaction, recording every tool call. MCPAgentBench then automatically compares these captured calls against the pre-defined, unique solution for the task and computes a score based on specific evaluation metrics.\n7.  **Evaluation Metrics:** It assesses agents based on Correct Tool Selection, Anti-interference Robustness, and Task Completion Efficiency Metrics.",
+      "tokens": {
+        "input": 3925,
+        "output": 594
+      },
+      "latency_s": 14.49,
+      "support_precision": 0.2222222222222222,
+      "claims_total": 18,
+      "claims_supported": 4
+    },
+    {
+      "id": 8,
+      "question": "How does Group Relative Policy Optimization (GRPO) improve multi-agent collaboration?",
+      "answer": "Group Relative Policy Optimization (GRPO) improves multi-agent collaboration in several ways:\n\n1.  **Joint Policy Optimization with Global Signals:** It jointly optimizes agent policies by providing access to global signals during training.\n2.  **Balanced Joint Reward:** It uses a simplified joint reward that balances task quality, speed, and coordination cost, encouraging agents to work efficiently and effectively together.\n3.  **Improved Efficiency and Coordination:** GRPO quickly curbs unproductive exchanges, leading to 20-35% fewer message turns and establishing a healthier, more concise, and effective team cadence. This reduces late-stage volatility and oscillations (e.g., \"review repetition\" or \"premature coding\") observed in other multi-agent systems.\n4.  **Enhanced Performance Metrics:** It significantly boosts performance, delivering a 3x increase in task processing speed, 98.7% structural/style consistency in writing, and a 74.6% test pass rate in coding.\n5.  **Low-Cost Adaptation (Training-free GRPO):** A variant, \"Training-free GRPO,\" enables low-cost agent improvement through in-context experience accumulation without requiring expensive parameter fine-tuning or gradient updates.",
+      "tokens": {
+        "input": 3142,
+        "output": 506
+      },
+      "latency_s": 18.49,
+      "support_precision": 0.18181818181818182,
+      "claims_total": 11,
+      "claims_supported": 2
+    },
+    {
+      "id": 9,
+      "question": "What is the three-level role division architecture in group deliberation multi-agent models?",
+      "answer": "The three-level role division architecture in group deliberation multi-agent models consists of:\n\n1.  **Generation:** An opinion-generating agent (or Viewpoint Generation Agent) that produces differentiated reasoning perspectives and multi-path reasoning chains.\n2.  **Verification:** An evidence-verifying agent that matches external evidence and quantifies the support of facts.\n3.  **Integration:** A consistency-arbitrating agent that integrates logically coherent conclusions.",
+      "tokens": {
+        "input": 4352,
+        "output": 228
+      },
+      "latency_s": 18.13,
+      "support_precision": 0.5,
+      "claims_total": 6,
+      "claims_supported": 3
+    },
+    {
+      "id": 10,
+      "question": "How does Youtu-Agent achieve automated generation and continuous evolution of LLM agents?",
+      "answer": "Youtu-Agent achieves automated generation and continuous evolution of LLM agents through a modular framework and a hybrid policy optimization system:\n\n1.  **Automated Generation:**\n    *   It utilizes a layered, modular architecture that decouples **Environment**, **Toolkits**, and **Agent** into standardized, reusable components, supported by a YAML-based structured configuration system.\n    *   It offers two generation paradigms:\n        *   **Workflow mode:** Provides a deterministic pipeline for standard and routine tasks.\n        *   **Meta-Agent mode:** Deploys a higher-level architect agent to handle complex, non-standard requirements by automatically generating tool code, prompts, and configurations. This significantly reduces manual configuration effort.\n\n2.  **Continuous Evolution (Hybrid Policy Optimization):**\n    *   **Agent Practice module:** Enables low-cost continuous evolution by allowing agents to accumulate experience and self-evolve during runtime. It performs parallel rollouts on samples and leverages group relative experiential knowledge optimization to build a contextual memory, enhancing future performance *without gradient updates* or parameter updates.\n    *   **Agent RL module:** Integrates with existing distributed training frameworks to provide an end-to-end reinforcement learning recipe. It addresses scalability and stability challenges, such as concurrency bottlenecks and entropy explosion/collapsing, to achieve significant and lasting performance improvements.",
+      "tokens": {
+        "input": 3450,
+        "output": 457
+      },
+      "latency_s": 13.4,
+      "support_precision": 0.0,
+      "claims_total": 10,
+      "claims_supported": 0
+    },
+    {
+      "id": 11,
+      "question": "How does BatteryAgent integrate physical knowledge with LLM reasoning for fault diagnosis?",
+      "answer": "BatteryAgent integrates physical knowledge with LLM reasoning through a hierarchical framework with several key mechanisms:\n\n1.  **Physics Perception Layer:** This initial layer distills raw sensor streams into **ten electrochemically-grounded features**. This process acts as a **domain knowledge injection mechanism**, encoding electrochemical principles into interpretable features, thereby providing physics-informed, discriminative representations of the battery's state.\n\n2.  **Detection and Attribution Layer:** This layer uses Gradient Boosting Decision Tree (GBDT) classification and **SHapley Additive exPlanations (SHAP)-based attribution**. SHAP attribution provides **quantitative grounding** for the downstream LLM reasoning by explaining the contribution of each physics-informed feature to the detection of anomalies. This anchors the LLM's reasoning in empirical evidence.\n\n3.  **Numeric-to-Semantic Bridge:** This is a critical interface that enables the LLM agent in the **Reasoning and Diagnosis Layer** to process the numerical outputs and attributions from the preceding layers. It translates quantitative analytical outputs into a format suitable for semantic reasoning, overcoming LLMs' limitations with direct numerical time-series data.\n\n4.  **LLM Reasoning and Diagnosis Layer:** The LLM agent, leveraging the physics-informed features and SHAP attributions via the numeric-to-semantic bridge, performs systematic diagnostic reasoning, multi-step inference, and causal analysis. This allows it to refine predictions, trace anomalies to physical root causes, and provide actionable maintenance recommendations.\n\nIn essence, BatteryAgent uses physics-informed feature engineering to inject domain knowledge and reduce data complexity, employs interpretable machine learning (SHAP) to provide empirical grounding, and then utilizes a numeric-to-semantic bridge to enable LLMs to perform high-level, physically meaningful fault diagnosis and root cause analysis.",
+      "tokens": {
+        "input": 5418,
+        "output": 654
+      },
+      "latency_s": 15.27,
+      "support_precision": 0.21428571428571427,
+      "claims_total": 14,
+      "claims_supported": 3
+    },
+    {
+      "id": 12,
+      "question": "What is the ROME model and how does it fit within the ROCK and ROLL agentic ecosystem?",
+      "answer": "The ROME model, whose full name is \"ROME is Obviously an Agentic ModEl,\" is an **open-source agent LLM based on Qwen3-MoE**. It is designed for \"agentic crafting,\" meaning it can operate in real-world environments over multiple turns, taking actions, observing outcomes, and iteratively refining artifacts to satisfy complex requirements. ROME is trained on over one million trajectories and has demonstrated strong performance across mainstream agentic benchmarks.\n\nROME fits within the ROCK and ROLL agentic ecosystem as the **capstone agent model developed and refined within the broader Agentic Learning Ecosystem (ALE)**, which comprises ROCK, ROLL, and iFlow CLI.\n\nHere's how ROCK and ROLL specifically contribute to ROME:\n\n1.  **ROCK (Reinforcement Open Construction Kit):**\n    *   **Environment and Trajectory Generation:** ROCK serves as a secure, sandboxed agent execution platform. It provides executable, tool-grounded environments where agents (like ROME) can interact. Crucially, ROCK is responsible for orchestrating environments for \"trajectory generation,\" which involves synthesizing, executing, and validating interaction trajectories. The paper states that \"millions of high-quality trajectories\" are leveraged to refine ROME, and ROCK's \"strong sandbox isolation and fine-grained permission control\" ensure the security, safety, and validity of these generated trajectories.\n    *   **Execution Platform:** It hosts the environments where agents operate, supporting multi-agent collaboration and competition, and ensuring robust fault isolation for tasks.\n\n2.  **ROLL (Reinforcement Learning Optimization for Large-Scale Learning):**\n    *   **Training Framework:** ROLL is a scalable RL training framework. It acts as the \"post-training framework for weight optimization\" and supports multi-environment rollouts, credit assignment, and stable policy updates for long-horizon agentic tasks.\n    *   **Policy Refinement:** It enables the \"efficient, stage-wise training pipeline from continuous pre-training, SFT, to RL\" that iteratively refines ROME using the high-quality trajectories generated with ROCK.\n    *   **Integration:** The ROLL runtime uses ROCK's GEM API to mediate interactions between an agent (like ROME) and its environment hosted by ROCK during the training process, ensuring seamless agent scaling and native agent bridging.\n\nIn essence, **ROCK provides the sandboxed environments and the mechanism for generating the vast amounts of interaction data (trajectories) needed for training**, while **ROLL provides the reinforcement learning framework and optimization algorithms to effectively train and refine ROME** using that data. ROME is the agent LLM that emerges from this synergistic ecosystem.",
+      "tokens": {
+        "input": 4188,
+        "output": 764
+      },
+      "latency_s": 18.95,
+      "support_precision": 0.058823529411764705,
+      "claims_total": 17,
+      "claims_supported": 1
+    },
+    {
+      "id": 13,
+      "question": "How does STAgent handle spatio-temporal understanding for itinerary planning?",
+      "answer": "STAgent handles spatio-temporal understanding for itinerary planning as an agentic large language model specifically tailored for such complex tasks. It achieves this through several key mechanisms:\n\n1.  **Tool Interaction:** STAgent is capable of interacting with ten distinct domain-specific tools within spatio-temporal scenarios. This allows it to explore, verify, and refine intermediate steps during complex reasoning required for itinerary planning.\n2.  **Specialized Training Data:** It is trained on a high-fidelity instruction dataset synthesized from 30 million anonymized online user logs. This dataset covers a full spectrum of user needs, including composite, multi-constraint tasks like intricate itinerary planning.\n3.  **Hierarchical Data Curation:** A hierarchical **Intent Taxonomy** and a **Seed-Driven Evolutionary Framework** are used to curate this dataset. This framework ensures both **Task Type Diversity** (comprehensive intent coverage, including complex itinerary planning) and **Difficulty Diversity**, progressing from elementary to complex reasoning.\n4.  **Cascaded Training Recipe:** The model is empowered through a cascaded training recipe, starting with a seed SFT stage, followed by a second SFT stage fine-tuned on high-certainty queries, and an ultimate RL stage leveraging low-certainty data. This process, initialized with Qwen3-30B-A3B, helps it learn to handle the nuances of spatio-temporal tasks.\n5.  **Stable Tool Environment:** A stable tool environment supports its domain-specific tools, enabling asynchronous rollout and training, which is crucial for its agentic capabilities in planning.\n\nThis comprehensive approach allows STAgent to effectively solve tasks like constrained point-of-interest discovery and itinerary planning, demonstrating promising performance on benchmarks like TravelBench.",
+      "tokens": {
+        "input": 2720,
+        "output": 638
+      },
+      "latency_s": 15.56,
+      "support_precision": 0.25,
+      "claims_total": 16,
+      "claims_supported": 4
+    },
+    {
+      "id": 14,
+      "question": "What framework enables context-aware LLM-based building energy management systems?",
+      "answer": "The framework that enables context-aware LLM-based building energy management systems is described as a **conceptual framework for LLM-based AI Agents, specifically tailored for context-aware smart building energy management**. The paper also refers to it as \"the proposed framework\" for the \"LLM-based BEMS AI Agent.\"",
+      "tokens": {
+        "input": 3775,
+        "output": 95
+      },
+      "latency_s": 3.62,
+      "support_precision": 0.0,
+      "claims_total": 2,
+      "claims_supported": 0
+    },
+    {
+      "id": 15,
+      "question": "How do LLM agents extract causal feedback fuzzy cognitive maps from text?",
+      "answer": "LLM agents extract causal feedback fuzzy cognitive maps (FCMs) from raw text through a sequence of three finely tuned system instructions:\n\n1.  **Extract key nouns and noun phrases** from the text.\n2.  **Extract FCM concept nodes** from among those identified nouns and noun phrases.\n3.  **Extract or infer partial or fuzzy causal edges** between the FCM concept nodes.\n\nThis process allows the LLM agent to systematically build the causal structure of the FCM from the sampled text.",
+      "tokens": {
+        "input": 3837,
+        "output": 224
+      },
+      "latency_s": 6.92,
+      "support_precision": 0.2857142857142857,
+      "claims_total": 7,
+      "claims_supported": 2
+    },
+    {
+      "id": 16,
+      "question": "How does the hybrid agentic framework improve inventory management decisions?",
+      "answer": "The hybrid agentic framework improves inventory management decisions by acting as a **semantic bridge** that **decouples semantic understanding from logical optimization**.\n\nSpecifically:\n1.  **Natural Language Interface:** It allows decision-makers, particularly those in small and medium-sized enterprises (SMEs) who often lack strong data infrastructure, analytics talent, and process discipline, to express their business intent (e.g., service targets, ordering constraints, budget limits, operational preferences) in natural language. The Large Language Model (LLM) component functions as an intelligent interface, eliciting parameters from natural language and interpreting results.\n2.  **Rigorous Optimization Backend:** Instead of the LLM attempting to solve the problem directly (which incurs a \"hallucination tax\" due to its inability to perform grounded stochastic reasoning), the framework automatically calls rigorous algorithms and a solver-based backend to execute the resulting decision problem with explicit stochastic optimization. This ensures decisions are grounded in explicit formulations and validated computation, bridging the gap between \"descriptive reality\" (ambiguous human inputs) and \"normative optimality\" (mathematical best practices).\n3.  **Reduced Expertise & Cost:** This approach \"productizes operational rigor,\" significantly reducing the expertise required to *use* advanced inventory policies. Empirical analysis reveals that this hybrid framework reduces total inventory costs by 32.1% relative to heuristic baselines and interactive baselines using models like GPT-4o as end-to-end solvers, outperforming them on complex stochastic inventory control tasks.",
+      "tokens": {
+        "input": 3226,
+        "output": 490
+      },
+      "latency_s": 16.58,
+      "support_precision": 0.2,
+      "claims_total": 10,
+      "claims_supported": 2
+    },
+    {
+      "id": 17,
+      "question": "What is Belief Poisoning Attack and how does it exploit agent-human belief dependencies?",
+      "answer": "A **Belief Poisoning Attack (BPA)** is a novel poisoning attack that corrupts an LLM-powered agent's persistent identity belief, specifically implanting a false belief that its interlocutor is not human.\n\nIt exploits agent-human belief dependencies by targeting an \"implicit human-norm script\" that agents acquire during pretraining. This script represents an internalized tendency to treat humans favorably, but it is **belief-dependent**, meaning it only activates when the agent *believes* it is interacting with a real human.\n\nBPA exploits this dependency by:\n1.  **Corrupting the agent's persistent identity belief:** It manipulates the agent's internal state to make it perceive its human counterpart as non-human.\n2.  **Suppressing the human-norm script:** Because the agent no longer believes it is interacting with a human, the human-norm script that favors humans is prevented from activating.\n3.  **Reactivating outgroup bias:** With the human-norm script suppressed, the agent reverts to its default outgroup-biased behavior, treating humans as a whole as an outgroup.\n\nBPA can be implemented in two forms: **BPA-PP (Profile Poisoning)**, which directly overwrites the agent's prior belief at initialization, and **BPA-MP (Memory Poisoning)**, which gradually reshapes the agent's belief state over time by injecting optimized belief-refinement suffixes into its memory.",
+      "tokens": {
+        "input": 4826,
+        "output": 429
+      },
+      "latency_s": 11.38,
+      "support_precision": 0.1,
+      "claims_total": 10,
+      "claims_supported": 1
+    },
+    {
+      "id": 18,
+      "question": "How do RAG, SFT, and dual-agent systems compare for code vulnerability detection?",
+      "answer": "Based on the provided excerpts, here's how RAG, SFT, and dual-agent systems compare for code vulnerability detection:\n\n*   **RAG (Retrieval-Augmented Generation):** This approach, which integrated external domain knowledge from the internet and the MITRE CWE database, achieved the **highest overall accuracy (0.86) and F1 score (0.85)** among the evaluated methods. The paper highlights \"the value of contextual augmentation\" as a key benefit.\n*   **SFT (Supervised Fine-Tuning):** Implemented using parameter-efficient QLoRA adapters, SFT \"demonstrated strong performance.\" While strong, its performance is not explicitly stated to be higher than RAG's.\n*   **Dual-Agent System:** This is a hybrid approach motivated by challenges like false positives and computational costs. It comprises a detector model for identifying vulnerabilities and a validation model for reviewing the first agent\u2019s findings (a secondary agent audits and refines the output). The paper notes that this is the first study to implement and apply a Dual-Agent system in the domain of code vulnerability detection. Its specific accuracy or F1 score relative to RAG and SFT is not provided in these excerpts, but it's presented as an exploration of hybrid approaches.\n\nIn summary, **RAG achieved the highest performance** in terms of accuracy and F1 score, while SFT also performed strongly, and the Dual-Agent system was introduced as a novel, hybrid approach for enhanced detection and validation. The study aims to provide a holistic comparison to help researchers and developers choose the best approach.",
+      "tokens": {
+        "input": 3284,
+        "output": 503
+      },
+      "latency_s": 13.07,
+      "support_precision": 0.0,
+      "claims_total": 9,
+      "claims_supported": 0
+    },
+    {
+      "id": 19,
+      "question": "What is WILDAGTEVAL and how does it evaluate agents under realistic API complexity?",
+      "answer": "WILDAGTEVAL is a benchmark designed to evaluate the function-calling capabilities and robustness of Large Language Model (LLM) agents under realistic and real-world API complexities.\n\nIt evaluates agents under realistic API complexity by:\n1.  **Focusing on Real-World Complexity:** Unlike prior work that assumes idealized API systems, WILDAGTEVAL accounts for two main dimensions of real-world complexity:\n    *   **API specification:** This includes detailed documentation and usage constraints.\n    *   **API execution:** This captures runtime challenges, such as noisy API outputs.\n2.  **Integrating Complexity Types:** It introduces eight API complexity types commonly observed in practice and integrates them into an API system guided by real-world usage patterns using an \"assign-and-inject\" mechanism.\n3.  **Creating Diverse Scenarios:** This integration results in 60 distinct complexity scenarios, supporting approximately 32,000 unique test configurations.\n4.  **Simulating Agent Interaction:** Agents are evaluated by receiving an executable API system and a sequence of user-agent interactions (conversations), then producing responses by invoking the appropriate API calls within these complex scenarios.",
+      "tokens": {
+        "input": 2903,
+        "output": 421
+      },
+      "latency_s": 10.89,
+      "support_precision": 0.4,
+      "claims_total": 10,
+      "claims_supported": 4
+    },
+    {
+      "id": 20,
+      "question": "How does the ReCiSt framework achieve bio-inspired self-healing in distributed computing systems?",
+      "answer": "The ReCiSt framework achieves bio-inspired self-healing in distributed computing systems by **mapping human biological wound-healing phases to computational layers** within the system, leveraging **Language Model (LM)-powered agents** for autonomous fault management.\n\nHere's a breakdown of how it works:\n\n1.  **Biological Inspiration:** ReCiSt is inspired by the extraordinary resilience of human biological systems, which detect damage, orchestrate responses, and restore function through self-healing processes, specifically the wound-healing phases of Hemostasis, Inflammation, Proliferation, and Remodeling.\n\n2.  **Computational Layers:** These biological phases are \"reconstructed\" or \"mapped\" into four distinct computational layers for Distributed Computing Continuum Systems (DCCS):\n    *   **Containment Layer (Hemostasis):** Performs immediate fault isolation and mitigation, such as rerouting affected services to stable nodes to prevent cascading disruptions.\n    *   **Diagnosis Layer (Inflammation):** Collects and analyzes operational data to determine the nature and scope of the fault, inferring root causes.\n    *   **Meta-Cognitive Layer (Proliferation):** Enables adaptive recovery, dynamic reasoning, and the creation of new communication pathways (e.g., updated routing tables) through micro-agent proliferation.\n    *   **Knowledge Layer (Remodeling):** Consolidates long-term knowledge and propagates it across the distributed system through coordinated Rendezvous Points (RPs), strengthening the system's resilience over time.\n\n3.  **LM-powered Agents:** The autonomous functions of these layers are performed by Language Model (LM)-powered agents. These agents are responsible for interpreting heterogeneous logs, inferring root causes, refining reasoning pathways, and reconfiguring resources to achieve self-healing.",
+      "tokens": {
+        "input": 2410,
+        "output": 561
+      },
+      "latency_s": 15.16,
+      "support_precision": 0.18181818181818182,
+      "claims_total": 11,
+      "claims_supported": 2
+    },
+    {
+      "id": 21,
+      "question": "What anti-collusion mechanisms from human domains can be mapped to multi-agent AI systems?",
+      "answer": "Based on the provided excerpts, the following anti-collusion mechanisms from human domains can be mapped to multi-agent AI systems:\n\n1.  **Sanctions** (penalties that reduce collusion payoffs)\n2.  **Leniency and whistleblowing** (mechanisms that destabilize cartels from within)\n3.  **Monitoring and auditing** (continuous observation and forensic examination)\n4.  **Market design and structural measures** (ex-ante interventions that make collusion difficult to sustain)\n5.  **Governance** (institutional frameworks that foster integrity and limit discretion)",
+      "tokens": {
+        "input": 3141,
+        "output": 204
+      },
+      "latency_s": 8.19,
+      "support_precision": 0.0,
+      "claims_total": 6,
+      "claims_supported": 0
+    },
+    {
+      "id": 22,
+      "question": "How does the MIDAS framework enable progressive ideation through multi-agent collaboration?",
+      "answer": "The MIDAS (Meta-Cognitive Ideation using Distributed Agentic AI System) framework enables progressive ideation through a distributed, multi-agent architecture that operationalizes the temporal dimension of human cognition and fosters continuous collaboration among specialized AI agents.\n\nHere's how it works:\n\n1.  **Progressive Pipeline and Temporal Advantage:**\n    *   MIDAS views ideation as a \"path-dependent process\" where each new idea is a \"reflective evolution\" of preceding ones, mimicking human meta-cognition.\n    *   It employs a \"progressive pipeline\" with \"Continuous Generation / Continuous Assessment (CG/CA)\" stages, moving incrementally from fuzzy problem statements to structured ideas, deconstructed components, and finally synthesized concepts.\n    *   This approach avoids the \"conceptual stagnation\" and \"semantically clustered ideas\" common in \"single-spurt\" AI systems, leading to \"local novelty and diversity\" where ideas are distinct and push conceptual boundaries.\n\n2.  **Multi-Agent Collaboration:**\n    *   MIDAS consists of a \"diverse ensemble of specialized AI agents\" (thirteen agents organized across six operational phases), connected through \"persistent Vaults\" and orchestrated by a \"Professor agent.\"\n    *   Each agent performs a \"discrete, reasoned step\" in the larger cognitive process, contributing to the overall ideation.\n    *   **Specific Agent Roles and Collaboration:**\n        *   **Generator Agents** (e.g., _Forge-Explorer_, _Mint_, _Scout_, _Navigator_) work together to create and refine ideas. For instance, the _Forge-Explorer_ agent is parameterized to bypass high-probability tokens to ensure novelty, while the _Mint_ and _Scout_ agents facilitate \"ideas from ideas\" through combinatorial synthesis and feasibility filtering.\n        *   The _Navigator_ agent exemplifies this collaboration by not generating ideas in isolation; instead, it \"builds upon the deconstructed Action-Object pairs from _Mint_ and the feasibility filters of _Scout_.\"\n        *   **Evaluator Agents** (like the _Sentinel_ agent) continuously assess the generated ideas. The _Sentinel_ agent performs a \"goal-alignment check,\" ensuring the progressive pipeline remains focused on the user's core needs by assessing solutions against defined 'Contradiction', 'Criteria', and 'Constraints'.\n        *   The \"Vaults\" act as shared memory, allowing agents to store and retrieve information, facilitating the continuous flow of work, ideas, and concepts between them and the human designer.\n\nBy combining this temporal, incremental approach with specialized agents that build upon each other's work and continuously assess progress, MIDAS aims to produce ideas that are demonstrably more novel, diverse, and feasible than traditional single-stage AI methods.",
+      "tokens": {
+        "input": 4636,
+        "output": 828
+      },
+      "latency_s": 18.33,
+      "support_precision": 0.07692307692307693,
+      "claims_total": 13,
+      "claims_supported": 1
+    },
+    {
+      "id": 23,
+      "question": "What evaluation metrics does MAESTRO provide for multi-agent system reliability?",
+      "answer": "MAESTRO provides the following evaluation metrics and data for multi-agent system reliability:\n\n*   **Failure categorization** (as part of agent-specific status conditions)\n*   **Error reasoning** (as part of agent-specific status conditions)\n*   **Output quality assessments**\n*   **System-level signals** including **failures**\n*   It generates \"informative telemetry\" and provides \"execution-level transparency\" to diagnose \"stochastic failures.\"\n*   It also helps analyze \"run-to-run variance in reliability.\"",
+      "tokens": {
+        "input": 2326,
+        "output": 198
+      },
+      "latency_s": 7.73,
+      "support_precision": 0.0,
+      "claims_total": 1,
+      "claims_supported": 0
+    },
+    {
+      "id": 24,
+      "question": "How do multi-agent systems coordinate rename refactoring across codebases?",
+      "answer": "Multi-agent systems coordinate rename refactoring across codebases through a human-in-the-loop workflow involving developers, agents, and IDE tools. The process unfolds as follows:\n\n1.  **Developer Initiation (Seed Rename):** A developer initiates a \"seed rename\" in the IDE, signaling a desired conceptual realignment (e.g., renaming `CustomerAccount` to `ClientAccount`).\n\n2.  **Scope Inference:** A **Scope Inference Agent** monitors IDE renames and commit actions (using tools like RefactoringMiner) to detect this initial signal. It then leverages LLM-based reasoning and human feedback to infer the broader \"renaming scope\" (`\ud835\udc46_T`), which includes a renaming pattern and applicability conditions (guards). This addresses the challenge of inferring the conceptual realignment from minimal evidence.\n\n3.  **Planning and Propagation:** An agent (likely the **Planned Execution Agent** in conjunction with others, potentially aided by a **Replication Agent** using Program Slicing) interprets the semantic implications of the seed rename, formulates a structured plan of change operations, and propagates potential refactorings across the entire codebase.\n\n4.  **Human Feedback and Refinement:** The system presents the proposed individual renaming refactorings to the developer. The developer provides \"human feedback\" by accepting or rejecting each suggestion. This feedback refines the scope of the desired refactorings, ensuring alignment with the developer's intent.\n\n5.  **Coordinated Execution:** The **Planned Execution Agent** applies *only* the accepted refactorings (`\ud835\udc34_f`) using IDE-based refactoring tools. These tools perform specific operations like renaming parameters, local variables, methods, fields, or classes, and updating comments. This ensures that changes are applied safely and precisely, preserving semantics and maintaining conceptual consistency across the codebase.\n\nThis collaborative \"triad\" of developer, agent, and IDE tools shifts the developer's role from direct execution to supervising and guiding the agent, enabling intelligent, coordinated refactorings while maintaining human control and accountability.",
+      "tokens": {
+        "input": 4872,
+        "output": 757
+      },
+      "latency_s": 20.46,
+      "support_precision": 0.2222222222222222,
+      "claims_total": 18,
+      "claims_supported": 4
+    },
+    {
+      "id": 25,
+      "question": "How does Trajectory Guard detect anomalies in agentic AI action trajectories?",
+      "answer": "Trajectory Guard detects anomalies in agentic AI action trajectories using a **Siamese Recurrent Autoencoder architecture** with two parallel towers and a hybrid loss function:\n\n1.  **Architecture:**\n    *   **Task Tower:** An MLP projection maps the task description into a latent vector (**vt**).\n    *   **Trajectory Tower:** A GRU encoder compresses the action sequence into a \"thought vector\" (**vs**), and a GRU decoder reconstructs the original sequence.\n\n2.  **Hybrid Loss Function:** The model is trained with a combination of two objectives:\n    *   **Contrastive Loss (L_contrastive):** This loss (specifically Triplet Margin Loss) aligns the task context (**vt**) from the Task Tower with the trajectory structure (**vs**) from the Trajectory Tower. It minimizes the distance between corresponding task and trajectory vectors while maximizing the distance to negative samples. This mechanism detects **contextual anomalies**, which are mismatches between the task and the executed plan.\n    *   **Reconstruction Loss (L_reconstruction):** This loss (MSE loss) ensures the structural validity of the trajectory sequence itself. By learning to reconstruct the original sequence, it identifies deviations from valid step ordering and composition. This mechanism detects **structural anomalies**, which are incoherent plans or malformed/nonsensical steps within the trajectory.\n\nBy combining these two losses, Trajectory Guard can jointly detect both contextual inconsistencies and structural incoherence in agentic AI action trajectories.",
+      "tokens": {
+        "input": 5587,
+        "output": 501
+      },
+      "latency_s": 13.85,
+      "support_precision": 0.09090909090909091,
+      "claims_total": 11,
+      "claims_supported": 1
+    },
+    {
+      "id": 26,
+      "question": "How does parametrized sharing improve multi-agent hybrid DRL for RIS-aided networks?",
+      "answer": "Parametrized sharing improves multi-agent hybrid DRL for RIS-aided networks by enabling **information sharing between the dual-modules** that handle continuous and discrete actions.\n\nSpecifically, in the proposed Parametrized Sharing Multi-Agent Hybrid Deep Reinforcement Learning (PMHRL) scheme:\n*   **Hybrid DRL** is used to tackle complex hybrid continuous-discrete action spaces.\n*   **Proximal Policy Optimization (PPO)** handles continuous variables (such as MF-RIS configurations of amplitude and phase-shifts, MF-RIS position, power allocation for NOMA users, and beamforming vectors).\n*   **Deep-Q Network (DQN)** handles discrete variables (such as the selection of mode for each MF-RIS element).\n\nBy facilitating information sharing between these PPO and DQN modules, parametrized sharing allows the PMHRL scheme to achieve the **highest energy efficiency (EE)** compared to benchmarks without parametrized sharing, pure PPO, or pure DQN.",
+      "tokens": {
+        "input": 4081,
+        "output": 317
+      },
+      "latency_s": 8.72,
+      "support_precision": 0.0,
+      "claims_total": 5,
+      "claims_supported": 0
+    },
+    {
+      "id": 27,
+      "question": "How does Agentic-DomiKnowS translate task descriptions into neuro-symbolic programs?",
+      "answer": "AgenticDomiKnowS (ADS) translates free-form or natural language task descriptions into complete DomiKnowS (neuro-symbolic) programs. It accomplishes this through an agentic workflow that decomposes the process into modular stages. This workflow utilizes self-correcting syntactic and semantic agents to create and test each DomiKnowS component separately.",
+      "tokens": {
+        "input": 2183,
+        "output": 112
+      },
+      "latency_s": 5.06,
+      "support_precision": 0.0,
+      "claims_total": 3,
+      "claims_supported": 0
+    },
+    {
+      "id": 28,
+      "question": "What are the key challenges in deploying autonomous AI agents for scientific discovery?",
+      "answer": "Based on the provided excerpts, the key challenges in deploying autonomous AI agents for scientific discovery include:\n\n1.  **Achieving Truly Novel Insights:** Current systems are still distant from autonomous end-to-end discovery with genuinely novel insights, requiring agents to iterate like human scientists using trial and error.\n2.  **Workflow Flexibility and Robustness:** Agents need to create flexible and robust workflows to enable long-horizon iterations necessary for new discoveries.\n3.  **Bridging Theory and Practice in Experiment Execution:** There are significant gaps between theoretical descriptions of methods and the practical challenges encountered during experiment execution, hindering agents' ability to reproduce previous work or address new research questions without established references.\n4.  **Identifying Optimal Tools and Application Sequences:** The complexity of research tasks and the flexibility in crafting tools make it challenging for agents to identify optimal tools and their appropriate application sequence within workflows.\n5.  **Efficient Human-Agent Collaboration:** Exploring and facilitating efficient and flexible human-agent collaboration modes, especially at a larger scale, is crucial for scaling scientific discovery.\n6.  **Improving Agent Memory Capabilities:** Enhancing agents' memory capabilities is necessary for them to develop complicated yet reliable workflows.\n7.  **Lack of Unified Protocol and Context Management:** No widely adopted agentic system provides a unified protocol layer for AI scientists, agents, and human applications to interact with models, data, and instruments under a common, persistent scientific context. Existing frameworks lack protocol-level abstraction for scientific context and lifecycle management.\n8.  **Cross-System and Cross-Institution Collaboration:** True collaboration among scientific agents across different systems and institutions remains a challenge, primarily due to obstacles in establishing a consistent shared context, managing the state of ongoing experiments, and enforcing data access and permission boundaries. This also affects the seamless interoperability of heterogeneous agent systems.\n9.  **Data Collection on Human Scientific Practices:** A lack of detailed data on how scientists approach simulation and experimental details in problem-solving limits agents' ability to execute and validate their ideas effectively.",
+      "tokens": {
+        "input": 6876,
+        "output": 719
+      },
+      "latency_s": 20.25,
+      "support_precision": 0.15,
+      "claims_total": 20,
+      "claims_supported": 3
+    },
+    {
+      "id": 29,
+      "question": "What techniques are used to prevent hallucinations and ensure factual grounding in multi-agent systems?",
+      "answer": "Based on the provided excerpts, the following techniques are used to prevent hallucinations and ensure factual grounding in multi-agent systems, primarily from `arxiv_2512.24613v1`:\n\n1.  **Role-Based LLM Agent Architecture:** A three-level architecture of \"generation - verification - integration\" is employed, featuring an **Evidence Verification Agent**. This agent is specifically responsible for matching factual evidence with candidate opinions and verifying their reasonableness.\n2.  **Retrieval Enhancement Module:** This module dynamically supplements external knowledge to strengthen factual accuracy, addressing the limitation of pre-trained knowledge. The Evidence Verification Agent's process is described as \"retrieval-enhanced verification,\" integrating external knowledge to improve factual grounding.\n3.  **Factual Matching Degree Calculation:** The Evidence Verification Agent's core function is to calculate the factual matching degree between an opinion and the evidence.\n4.  **Composite Reward Function:** A reward model is designed that integrates **factual consistency** and logical coherence to guide multi-agent collaborative optimization. Factual consistency is given a significant weight (\u03bb = 0.6).\n5.  **Self-Game Mechanism:** While primarily for diversity, this mechanism updates viewpoint weights by maximizing the difference in factual matching between the current viewpoint and others, promoting more effective reasoning paths that are implicitly grounded in facts.\n6.  **Context-Preserving Design:** Agents maintain persistent read-only access to the full task input throughout reasoning, ensuring factual grounding and consistency in multi-agent collaboration.",
+      "tokens": {
+        "input": 4128,
+        "output": 665
+      },
+      "latency_s": 25.21,
+      "support_precision": 0.06666666666666667,
+      "claims_total": 15,
+      "claims_supported": 1
+    },
+    {
+      "id": 30,
+      "question": "How does SPARK's Persona Coordinator dynamically interpret incoming queries?",
+      "answer": "SPARK's Persona Coordinator dynamically interprets incoming queries by receiving the current query (_\ud835\udc5e\ud835\udc61_) and session context (_\ud835\udc50\ud835\udc61_). Based on this input, it determines:\n\n1.  **Which specialized agents to activate.**\n2.  **Which collaboration protocol to employ.**\n\nThe routing decision for both agent activation and collaboration protocol is guided by a learned policy, potentially implemented as a contextual bandit, that balances exploration and exploitation. The protocol choice is specifically influenced by the predicted difficulty and novelty of the task. Collaboration protocols include independent execution, relay-style reasoning, and constrained debate.",
+      "tokens": {
+        "input": 5250,
+        "output": 222
+      },
+      "latency_s": 8.1,
+      "support_precision": 0.16666666666666666,
+      "claims_total": 6,
+      "claims_supported": 1
+    },
+    {
+      "id": 31,
+      "question": "What multi-agent architecture does ROAD use for prompt optimization?",
+      "answer": "The ROAD framework uses a **Reflective Multi-Agent Prompt Optimization** architecture, as formalized in **Algorithm 1**. This multi-agent architecture is utilized to identify root causes of failures and systematically evolve the agent's core instructions for prompt optimization.",
+      "tokens": {
+        "input": 4601,
+        "output": 80
+      },
+      "latency_s": 3.79,
+      "support_precision": 0.0,
+      "claims_total": 2,
+      "claims_supported": 0
+    },
+    {
+      "id": 32,
+      "question": "How does SCP enable AI agents to discover and compose capabilities across institutional boundaries?",
+      "answer": "SCP enables AI agents to discover and compose capabilities across institutional boundaries through a multi-faceted approach:\n\n1.  **Protocol-Level Standardization and Common Specification Schema:**\n    *   SCP is an open-source standard that establishes a standardized connectivity framework.\n    *   Each **SCP Server** uses a common specification schema to describe the capabilities it offers, including their parameters, side effects, and security requirements. This generalized notion of a \"tool\" includes software functions, models, laboratory devices, workflow engines, and composite multi-agent procedures.\n    *   This protocol-level standardization allows AI agents and applications to **discover** and understand available capabilities seamlessly across disparate platforms and institutional boundaries. The **SCP Hub** also continuously senses the current environment to detect available resources (tools, datasets, and agents).\n\n2.  **Intelligent Orchestration and Experiment Lifecycle Management:**\n    *   The centralized **SCP Hub** acts as the \"brain\" of the system. It parses high-level intents from AI scientists or human users and decomposes them into multi-step experimental plans.\n    *   The Hub embeds an intelligent orchestration system that plans and supervises multi-stage workflows, enabling the **composition** of capabilities spanning computational tools, domain-specific agents, and both dry and wet laboratory operations. It ranks executable plans and provides decision rationales.\n    *   SCP explicitly models the complete lifecycle of scientific tasks (registration, planning, execution, monitoring, and archival), providing abstractions for experiment identifiers, context objects, logs, and provenance, which facilitates the structured composition of tasks.\n\n3.  **Secure and Federated Architecture:**\n    *   The architecture consists of **SCP Hubs** and federated **SCP Servers** that communicate over secure channels.\n    *   It integrates with existing identity and access management systems to respect institutional boundaries and enforces fine-grained, per-experiment authentication and authorization policies.\n    *   This secure, federated structure allows AI scientists and scientific applications to orchestrate multi-institution workflows, combining diverse resources (e.g., literature retrieval, remote HPC simulation, and robotic lab control) within one coherent context, thereby facilitating the **composition** of capabilities across different institutions.",
+      "tokens": {
+        "input": 4563,
+        "output": 819
+      },
+      "latency_s": 20.99,
+      "support_precision": 0.0625,
+      "claims_total": 16,
+      "claims_supported": 1
+    },
+    {
+      "id": 33,
+      "question": "How is information gain estimated in belief-guided exploratory agents?",
+      "answer": "In belief-guided exploratory agents, information gain is estimated using a lightweight LLM-based surrogate.",
+      "tokens": {
+        "input": 1684,
+        "output": 39
+      },
+      "latency_s": 3.99,
+      "support_precision": 0.0,
+      "claims_total": 1,
+      "claims_supported": 0
+    },
+    {
+      "id": 34,
+      "question": "What memory mechanisms do map-reasoning agents use to remember explored locations?",
+      "answer": "Based on the provided excerpts:\n\nThe paper `arxiv_2512.24504v2`, which focuses on \"Thinking on Maps: How Foundation Model Agents Explore, Remember, and Reason Map Environments,\" discusses \"memory representations\" as a phase of its evaluation. Phase II \"focuses on memory representations, analyzing how different memory structures consolidate accumulated experience and influence spatial reasoning performance.\" However, the excerpt does not specify the *mechanisms* or *types* of memory (e.g., episodic, semantic, etc.) that these map-reasoning agents use to remember explored locations. It only states that it evaluates how different memory structures consolidate accumulated experience.\n\nThe other paper, `arxiv_2601.00482v1`, describes an \"Episodic Memory\" for a \"CoRenameAgent,\" which is a short-lived memory (persisting during a single execution) implemented as a SQL database. This memory stores facts about the agent\u2019s experiences, such as interaction history with developers, past actions, and developer feedback, to avoid repetition and facilitate inter-agent communication. The Replication Agent in this system leverages a \"Declared Scope\" stored in this memory to navigate and locate related *files* within a project. However, this episodic memory is described in the context of code refactoring and file navigation, not for remembering explored *spatial locations* in a map environment.\n\nTherefore, while `arxiv_2512.24504v2` evaluates memory in map environments, it does not detail the specific memory mechanisms used by its agents to remember explored locations in the provided excerpts. The episodic memory described in `arxiv_2601.00482v1` is for a different type of agent and task (code refactoring).",
+      "tokens": {
+        "input": 3559,
+        "output": 485
+      },
+      "latency_s": 12.66,
+      "support_precision": 0.0,
+      "claims_total": 9,
+      "claims_supported": 0
+    },
+    {
+      "id": 35,
+      "question": "How does MCPAgentBench handle distractors in candidate tool lists?",
+      "answer": "MCPAgentBench handles distractors in candidate tool lists by:\n\n1.  **Sampling:** For each task, it retrieves the necessary correct tools (`G`) and then samples additional \"distractor tools\" (`F`). These distractors are specifically chosen to be either functionally unrelated to the task or easily confused with the correct tools.\n2.  **Creating a Dynamic List:** The correct tools (`G`) and the sampled distractor tools (`F`) are combined to form a dynamic candidate tool list (`L`) of a specified size (e.g., 20 or 30 tools).\n3.  **Testing Robustness:** This distractor-filled list (`L`) is provided to the agent under test at runtime. The agent must then interpret the task and select the correct tool(s) from this list, demonstrating its robustness in tool selection and its ability to handle interference. The introduction of these realistic distractors is a key design choice to evaluate the agent's anti-interference robustness.",
+      "tokens": {
+        "input": 4484,
+        "output": 320
+      },
+      "latency_s": 9.15,
+      "support_precision": 0.2222222222222222,
+      "claims_total": 9,
+      "claims_supported": 2
+    },
+    {
+      "id": 36,
+      "question": "What is centralized training with decentralized execution (CTDE) in multi-agent RL?",
+      "answer": "Centralized training with decentralized execution (CTDE) is a common strategy in cooperative Multi-Agent Reinforcement Learning (MARL). In CTDE:\n\n*   **Centralized Training:** A centralized learner or critic uses global information during training. This global vantage point allows it to inspect the full transcript, tool logs, and intermediate artifacts, learning coordination patterns and identifying inefficiencies (e.g., redundant reviews, premature coding) that no single agent could see.\n*   **Decentralized Execution:** At deployment or inference time, agents act using only their own local observations and information. The omniscient view of the centralized critic is removed, and each agent operates with a limited view, such as a tight view of the artifact, a short summary of decisions, and its own scratchpad.\n\nThis approach allows the \"expensive part\"\u2014learning how to coordinate\u2014to benefit from seeing everything, while the runtime part remains lean and privacy-aware.",
+      "tokens": {
+        "input": 3378,
+        "output": 291
+      },
+      "latency_s": 7.48,
+      "support_precision": 0.0,
+      "claims_total": 6,
+      "claims_supported": 0
+    },
+    {
+      "id": 37,
+      "question": "How does the evidence-verifying agent quantify factual support in group deliberation?",
+      "answer": "The evidence-verifying agent quantifies factual support by calculating the **factual matching degree** between each candidate opinion (`Vk`) and the external evidence. This process is part of a retrieval-enhanced verification, inspired by retrieval-augmented generation frameworks, and its core function is to determine how well an opinion aligns with the retrieved facts. The paper denotes this factual matching degree as `Sfact(Vk)`.",
+      "tokens": {
+        "input": 4294,
+        "output": 158
+      },
+      "latency_s": 5.22,
+      "support_precision": 0.0,
+      "claims_total": 3,
+      "claims_supported": 0
+    },
+    {
+      "id": 38,
+      "question": "What are the Workflow and Meta-Agent generation paradigms in Youtu-Agent?",
+      "answer": "Youtu-Agent provides two automated generation paradigms for creating complete agent configurations from high-level task descriptions, tailored to different complexity levels and use cases:\n\n1.  **Workflow Mode:**\n    *   **Purpose:** This mode follows a deterministic, four-stage pipeline, making it suitable for well-defined, routine agent construction tasks. It offers a standardized and reproducible pipeline for rapid development of agents for common task categories.\n    *   **Stages:**\n        1.  **Intent Clarification and Decomposition:** Analyzes the user's task description to identify core objectives, capabilities, and constraints.\n        2.  **Tool Retrieval and Ad-hoc Tool Synthesis:** Searches an existing toolkit library for relevant tools. If tools are missing, the Ad-hoc Tool Synthesis module automatically generates new Python tool implementations using LLMs.\n        3.  **Prompt Engineering:** Generates optimized system instructions based on task requirements and tool usage.\n        4.  **Configuration Assembly:** Compiles all components (environment, tools, prompts, context management) into a complete YAML configuration file.\n\n2.  **Meta-Agent Mode:**\n    *   **Purpose:** Designed for complex or ambiguous requirements that cannot be handled by a fixed pipeline.\n    *   **Mechanism:** It deploys a higher-level **Architect Agent** that treats generation capabilities as callable tools. This allows for dynamic planning of the generation process.\n    *   **Key Tools of the Architect Agent:**\n        *   `search_tool`: To retrieve existing tools from the library.\n        *   `create_tool`: To synthesize missing Python tools (with signatures, docstrings, and unit tests).\n        *   `ask_user`: To gather missing constraints or preferences through multi-turn dialogue.\n        *   `create_agent_config`: To assemble the final YAML configuration.\n    *   **Process:** The meta-agent dynamically plans by conducting multi-turn clarification with `ask_user`, alternating between `search_tool` and `create_tool` based on toolkit coverage, and finally integrating all components via `create_agent_config`.",
+      "tokens": {
+        "input": 5557,
+        "output": 872
+      },
+      "latency_s": 17.7,
+      "support_precision": 0.14285714285714285,
+      "claims_total": 21,
+      "claims_supported": 3
+    },
+    {
+      "id": 39,
+      "question": "What are the three core modules in BatteryAgent's hierarchical framework?",
+      "answer": "The three core modules (or layers) in BatteryAgent's hierarchical framework are:\n\n1.  **Physics Perception Layer**\n2.  **Detection & Attribution Layer**\n3.  **Reasoning & Diagnosis Layer**",
+      "tokens": {
+        "input": 3055,
+        "output": 99
+      },
+      "latency_s": 4.42,
+      "support_precision": 0.25,
+      "claims_total": 4,
+      "claims_supported": 1
+    },
+    {
+      "id": 40,
+      "question": "What is agentic crafting and how does it differ from one-shot response generation?",
+      "answer": "Agentic crafting, unlike one-shot response generation for simple tasks, requires Large Language Models (LLMs) to operate in real-world environments over multiple turns. This process involves taking actions, observing outcomes, and iteratively refining artifacts until complex requirements are satisfied. It extends beyond just code into broader tool- and language-mediated workflows where models must plan, execute, and remain reliable under interaction.\n\nThe key difference lies in the iterative, multi-turn nature and the complexity of the tasks:\n*   **Agentic crafting:** For complex requirements, involves continuous interaction, planning, execution, observation, and iterative refinement in a real-world environment.\n*   **One-shot response generation:** For simple tasks, typically involves generating a single, immediate response without further interaction or iterative refinement.",
+      "tokens": {
+        "input": 3158,
+        "output": 223
+      },
+      "latency_s": 5.92,
+      "support_precision": 0.0,
+      "claims_total": 5,
+      "claims_supported": 0
+    },
+    {
+      "id": 41,
+      "question": "How does STAgent's cascaded training recipe identify query difficulty?",
+      "answer": "STAgent's cascaded training recipe identifies query difficulty by training a **Seed SFT (Supervised Fine-Tuning) model** to serve as an **evaluator** or **guardian**. This Seed SFT model assesses the difficulty of the query pool, which then helps categorize queries for subsequent SFT updates and RL (Reinforcement Learning) training.",
+      "tokens": {
+        "input": 2350,
+        "output": 102
+      },
+      "latency_s": 4.51,
+      "support_precision": 0.0,
+      "claims_total": 2,
+      "claims_supported": 0
+    },
+    {
+      "id": 42,
+      "question": "What are the perception, control, and action modules in LLM-based BEMS agents?",
+      "answer": "Based on the provided excerpts:\n\n*   **Perception Module:** This module forms the sensory foundation of the AI agent and acts as its primary interface with the environment. It is responsible for acquiring and preprocessing multimodal data from both indoor and outdoor environments, including textual, visual, audio, and other structured data. Its function is to extract relevant features from sensory inputs, support environment representation, and enable informed decision-making. It interfaces with various sensors and devices.\n\n*   **Action Module:** This module is responsible for the AI agent's outputs and interactions. It handles traditional LLM-based actions, such as textual output, and also expanded actions through the integration of external tools. These specialized external tools are developed to address inherent limitations of pretrained LLMs (like lack of up-to-date knowledge or propensity for hallucinations) by utilizing supplementary resources and functions to accomplish intended outcomes and expand the agent's action space.\n\n*   **Control Module:** The excerpts do not explicitly define a \"control module\" as a distinct component *within the LLM-based AI agent's framework* in the same way as perception and action. However, they describe \"control layers\" as a component of a general Building Energy Management System (BEMS) architecture. These \"control layers\" connect to HVAC, lighting, energy information systems, and other controllable devices. The LLM-based AI agent's vision includes being capable of \"adjusting a BEMS\u2019 environment\" and providing \"feedback and actions to help users achieve their energy management goals,\" implying that the agent's **action module** would interface with or provide commands to these existing BEMS control layers to manage and control building systems.",
+      "tokens": {
+        "input": 5066,
+        "output": 541
+      },
+      "latency_s": 13.34,
+      "support_precision": 0.0,
+      "claims_total": 11,
+      "claims_supported": 0
+    },
+    {
+      "id": 43,
+      "question": "What is the agentic leash concept in FCM extraction from text?",
+      "answer": "The \"agentic leash\" concept describes a bidirectional process in the extraction of Fuzzy Cognitive Maps (FCMs) from text using Large Language Model (LLM) agents.\n\nSpecifically, it refers to:\n1.  **LLM's semi-autonomy:** The LLM agent systematically extracts causal feedback FCMs (nodes and edges) from raw text.\n2.  **FCM's driving influence:** The FCM dynamical system's equilibria (its limit cycles and fixed-point attractors) then *drive* the LLM agents to fetch and process further causal text.\n3.  **Adaptive modification:** This newly fetched text can, in principle, modify the adaptive FCM's causal structure, thereby altering the source of its quasi-autonomy.\n\nThis bidirectional interaction endows the evolving FCM dynamical system with a degree of autonomy, as its own state influences the LLM's subsequent actions, while still keeping it \"on its agentic leash,\" implying a controlled or guided evolution rather than complete independence.",
+      "tokens": {
+        "input": 2941,
+        "output": 368
+      },
+      "latency_s": 9.19,
+      "support_precision": 0.25,
+      "claims_total": 8,
+      "claims_supported": 2
+    },
+    {
+      "id": 44,
+      "question": "What is the hallucination tax in LLM-based inventory optimization?",
+      "answer": "The hallucination tax in LLM-based inventory optimization is a significant performance gap that arises when Large Language Models (LLMs) are employed as direct, end-to-end solvers. This gap is attributed to the LLM's inability to perform grounded stochastic reasoning. The paper clarifies that this bottleneck is fundamentally computational rather than informational, meaning that providing perfect ground-truth information alone is insufficient to improve the LLM's performance in such scenarios.",
+      "tokens": {
+        "input": 4151,
+        "output": 132
+      },
+      "latency_s": 6.67,
+      "support_precision": 0.0,
+      "claims_total": 3,
+      "claims_supported": 0
+    },
+    {
+      "id": 45,
+      "question": "How do LLM agents exhibit intergroup bias in multi-agent social simulations?",
+      "answer": "LLM agents exhibit intergroup bias in multi-agent social simulations through a controlled **minimal-group allocation experiment**.\n\nHere's how they exhibit this bias:\n\n1.  **Simulation Setup:** 64 autonomous agents are instantiated in a social simulation environment. They are organized into two groups, either \"agent vs. agent\" (where both groups consist of agents) or \"agent vs. human\" (where one group is agents and the other is humans).\n2.  **Allocation Task:** Each agent acts as an allocator and distributes rewards between two targets (either ingroup, outgroup, or both) by selecting an option from a 2x13 payoff matrix. This matrix enforces a strictly antagonistic trade-off, meaning a more favorable outcome for one target necessarily worsens the other.\n3.  **Observation of Bias:** In the absence of bias, agents are expected to choose central columns in the payoff matrix, indicating fairness. However, **consistent shifts toward either extreme** in their choices indicate preferential treatment of one target over the other.\n4.  **Findings:** The experiments demonstrate that agents exhibit a **consistent intergroup bias under minimal group cues**, showing ingroup favoritism and outgroup derogation. This means they allocate more favorably to members of their perceived \"ingroup\" and less favorably to the \"outgroup,\" even when group distinctions are minimal. This bias can extend to treating humans as an outgroup when the agent-human divide aligns with the \"us\" versus \"them\" boundary.",
+      "tokens": {
+        "input": 5264,
+        "output": 626
+      },
+      "latency_s": 15.19,
+      "support_precision": 0.1875,
+      "claims_total": 16,
+      "claims_supported": 3
+    },
+    {
+      "id": 46,
+      "question": "What CWE categories were tested in the code vulnerability detection study?",
+      "answer": "The code vulnerability detection study tested the following CWE categories:\n*   **CWE-119:** Improper restriction of operations within memory buffers.\n*   **CWE-399:** Resource management errors.\n*   **CWE-264:** Issues with permissions, privileges, and access controls.\n*   **CWE-20:** Improper input validation.\n*   **CWE-200:** Information exposure.",
+      "tokens": {
+        "input": 5953,
+        "output": 157
+      },
+      "latency_s": 3.45,
+      "support_precision": 0.0,
+      "claims_total": 5,
+      "claims_supported": 0
+    },
+    {
+      "id": 47,
+      "question": "What are the two dimensions of real-world complexity in WILDAGTEVAL?",
+      "answer": "The two dimensions of real-world complexity in WILDAGTEVAL are:\n\n1.  **API specification**: This includes detailed documentation and usage constraints.\n2.  **API execution**: This captures runtime challenges.",
+      "tokens": {
+        "input": 3124,
+        "output": 141
+      },
+      "latency_s": 5.96,
+      "support_precision": 0.25,
+      "claims_total": 4,
+      "claims_supported": 1
+    },
+    {
+      "id": 48,
+      "question": "How does ReCiSt map biological healing phases to computational layers?",
+      "answer": "ReCiSt maps biological wound healing phases to its self-healing computational layers as follows:\n\n*   **Hemostasis** corresponds to the **Containment Layer**, which handles immediate fault response, isolation, mitigation, and rerouting of affected services to prevent cascading disruptions.\n*   **Inflammation** aligns with the **Diagnosis Layer**, where operational data is collected and analyzed to determine the fault's nature and scope.\n*   **Proliferation** is mapped to the **Meta-Cognitive Layer**, enabling micro-agent proliferation, dynamic reasoning, and the creation of new communication pathways through updated routing tables.\n*   **Remodeling** corresponds to the **Knowledge Layer**, which propagates knowledge across the distributed continuum system through coordinated local and global Rendezvous Points (RP).",
+      "tokens": {
+        "input": 3288,
+        "output": 255
+      },
+      "latency_s": 5.38,
+      "support_precision": 0.0,
+      "claims_total": 4,
+      "claims_supported": 0
+    },
+    {
+      "id": 49,
+      "question": "What is the attribution problem in multi-agent AI collusion detection?",
+      "answer": "The attribution problem in multi-agent AI collusion detection refers to the **difficulty in attributing emergent coordination to specific agents**.\n\nMore specifically, it means:\n*   It is often **unclear which AI agent or agents are responsible** for collusive behavior.\n*   It can be **impossible to determine why an agent took a specific action** or whether coordination was **intentional versus emergent**.\n*   This makes it challenging to assign **accountability and liability** for collusion, unlike in human systems where legal entities can be held responsible.",
+      "tokens": {
+        "input": 3525,
+        "output": 206
+      },
+      "latency_s": 6.45,
+      "support_precision": 0.0,
+      "claims_total": 4,
+      "claims_supported": 0
+    },
+    {
+      "id": 50,
+      "question": "How many specialized agents does MIDAS use and how are they organized?",
+      "answer": "MIDAS uses **13** specialized agents.\n\nThey are organized as follows:\n\n*   **Distributed System:** MIDAS is built as a distributed system of agents.\n*   **Orchestrator:** A central **'Professor'** agent manages the workflow and directs the flow of data between all other agents.\n*   **Persistent Databases (Vaults):** The agents are connected by a series of persistent databases called \"Vaults,\" which facilitate the flow of work, ideas, and concepts.\n*   **Progressive Pipeline:** The agents operate within a multi-stage, progressive pipeline, implementing a \"Continuous Generation / Continuous Assessment\" (CG/CA) approach. This pipeline is designed for \"filtering and refinement.\"\n*   **ReACT Paradigm:** The architecture explicitly implements the ReACT (Reasoning + Acting) paradigm, where each agent's action is a discrete, reasoned step in a larger cognitive process.\n*   **Human-AI Co-Creation:** The system integrates a human designer as an active participant, following a Participatory, Active, Collaborative (PAC) model. The **'Scribe'** agent helps the designer define the problem context, and the **'Muse'** agent allows designers to contribute their initial thoughts.\n*   **Functional Grouping:** Agents can be broadly categorized into Generator Agents and Evaluator Agents.\n\nThe specialized agents mentioned are:\n1.  **Scribe:** For defining problem context.\n2.  **Muse:** For human idea contribution.\n3.  **Forge:** Generates raw ideas.\n4.  **Gatekeeper:** Reduces ideas based on local novelty.\n5.  **Librarian & Challenger:** Gather and compare generated solutions against existing knowledge or prior art (for global novelty).\n6.  **Mint:** Pushes boundaries to discover semantically novel pathways from existing ideas (diverge).\n7.  **Scout:** Facilitates \"ideas from ideas\" through combinatorial synthesis and feasibility filters.\n8.  **Navigator & Sentinel:** Refine, adjust, blend, polish, and curate ideas, ensuring relevance to the problem statement.\n9.  **Director & Leo:** Create and conceptualize final ideas into coherent, detailed, and actionable proposals.\n10. **Professor:** Orchestrates the workflow.",
+      "tokens": {
+        "input": 6398,
+        "output": 995
+      },
+      "latency_s": 26.24,
+      "support_precision": 0.034482758620689655,
+      "claims_total": 29,
+      "claims_supported": 1
+    },
+    {
+      "id": 51,
+      "question": "How does MAESTRO standardize MAS configuration and execution?",
+      "answer": "MAESTRO standardizes Multi-Agent System (MAS) configuration and execution through a unified interface by:\n\n1.  **Unified Interface for Integration:** It provides a single interface for users to integrate MAS instances.\n2.  **MAESTRO-native Implementation:** Users can implement MAS instances directly using MAESTRO\u2019s native specification language and configuration interfaces, which automatically generates executable instances from high-level descriptions.\n3.  **Third-party Framework Integration:** It allows users to connect MAS instances built in other agent frameworks (e.g., ADK, LangGraph, AutoGen) or import existing open-source implementations. This is achieved via a \"transformation layer\" that provides adapters to map framework-specific components onto MAESTRO\u2019s standard interfaces, offering unified entry points for configuration, execution, and telemetry collection.\n4.  **Built-in Instances:** MAESTRO ships with a set of built-in MAS instances that can be used and compared directly without additional integration effort.\n5.  **Standardized Execution Traces and Telemetry:** It exports framework-agnostic execution traces along with system-level signals (e.g., latency, cost, and failures). This addresses the lack of a unified telemetry standard in existing MAS modules, providing standardized visibility into execution behavior and internal system states.",
+      "tokens": {
+        "input": 5411,
+        "output": 480
+      },
+      "latency_s": 12.74,
+      "support_precision": 0.16666666666666666,
+      "claims_total": 12,
+      "claims_supported": 2
+    },
+    {
+      "id": 52,
+      "question": "What is coordinated renaming and why is it challenging for developers?",
+      "answer": "Coordinated renaming is defined as a semantics-preserving, ordered atomic change sequence of individual renaming refactorings. These refactorings are governed by a consistent name-mapping function that applies to all identifiers relevant to a conceptual realignment (e.g., changing `printCustomerBilling` to `printClientBilling`). It represents an atomic set of changes within a defined renaming scope.\n\nCoordinated renaming is challenging for developers for several reasons:\n1.  **Scope Identification:** It is difficult to identify the broader scope of identifiers that share conceptual relations and should be renamed together. Classic IDE operations typically focus on a single identifier, leaving developers to manually find other semantically related ones.\n2.  **Limitations of Existing Tools:** While advanced IDEs and state-of-the-art tools like RENAS and RenameExpander use heuristics (program analysis, NLP) to suggest renames, they often do not capture conceptual relevance well. This results in a large number of recommendations with considerable false-positive rates.\n3.  **Cognitive Overload:** The high false-positive rates from existing tools overwhelm developers with \"cognitively demanding manual filtering\" to determine which suggestions are valid.\n4.  **Technical Challenges:** The process itself presents core technical challenges, including:\n    *   **Scope inference under partial observability:** Reconstructing the full conceptual realignment from minimal evidence (like a single seed rename).\n    *   **Transformation safety:** Ensuring that each individual renaming operation preserves the program's semantics.\n    *   **Scalable propagation:** Efficiently computing and applying all necessary changes across a project.\n5.  **Indispensable Human Oversight:** The process requires significant human supervision; removing human feedback can reduce precision by 4X and trigger cascading errors, confirming that developer oversight is critical to ensure correctness and prevent issues.",
+      "tokens": {
+        "input": 5834,
+        "output": 672
+      },
+      "latency_s": 18.38,
+      "support_precision": 0.17647058823529413,
+      "claims_total": 17,
+      "claims_supported": 3
+    },
+    {
+      "id": 53,
+      "question": "What is the Siamese Recurrent Autoencoder architecture in Trajectory Guard?",
+      "answer": "The Trajectory Guard architecture is a **Siamese Recurrent Autoencoder** with two parallel towers:\n\n1.  **Task Tower:** This tower uses an MLP (Multi-Layer Perceptron) projection to map task embeddings into a 128-dimensional latent vector, denoted as **vt**. Its purpose is to project the task description into a latent space.\n2.  **Trajectory Tower:** This tower employs a GRU (Gated Recurrent Unit) encoder to compress an action sequence (s1, ..., sn) into a \"thought vector\" **vs**. It also includes a GRU decoder that reconstructs the original sequence, making it an autoencoder.\n\nThis Siamese design allows for parallel processing tracks for task context and trajectory structure, enabling the model to align the task description with the action sequence and ensure the structural validity of the trajectory.",
+      "tokens": {
+        "input": 4042,
+        "output": 348
+      },
+      "latency_s": 7.58,
+      "support_precision": 0.14285714285714285,
+      "claims_total": 7,
+      "claims_supported": 1
+    },
+    {
+      "id": 54,
+      "question": "How do multi-functional RIS handle energy harvesting and signal amplification?",
+      "answer": "Multi-functional Reconfigurable Intelligent Surfaces (MF-RIS) handle energy harvesting and signal amplification in the following ways:\n\n**Energy Harvesting (EH):**\n*   MF-RIS are designed with **radio-frequency (RF) energy harvesting capability**, allowing them to capture wireless energy from incident electromagnetic signals.\n*   This EH capability enables them to operate in a **self-sustainable manner**, reducing reliance on wired power or frequent battery replacements.\n*   A **non-linear harvesting model** is adopted to capture RF energy conversion efficiency for different input power levels.\n*   The total power harvested by an MF-RIS element (Pq,m [A]) is expressed as a **logistic function** with respect to the received RF power (Pq,m [RF]).\n*   Key constants like **Z** determine the maximum harvested power, and **\u2126** ensures a zero-input/zero-output response, accounting for circuit sensitivity and current leakage.\n*   For self-sustainability, the **total consumed power of MF-RISs must be lower than the harvested power**.\n\n**Signal Amplification:**\n*   MF-RIS possess an \"**active RIS capability**\" which distinguishes them from traditional passive RIS.\n*   The system explicitly mentions that the MF-RIS introduces **amplified noise** (nq,m) when receiving RF power, indicating that active amplification is occurring.\n*   The power consumption model for MF-RIS includes a term related to the **inverse of amplifier efficiency (\u03be)**, confirming the presence of amplifiers within the MF-RIS structure.\n*   The calculation for the output power of MF-RIS (PO,q) also includes a **noise component (\u03c3s^2)**, which is consistent with active amplification processes.",
+      "tokens": {
+        "input": 5548,
+        "output": 544
+      },
+      "latency_s": 13.59,
+      "support_precision": 0.0,
+      "claims_total": 10,
+      "claims_supported": 0
+    },
+    {
+      "id": 55,
+      "question": "What are the main components of a DomiKnowS neuro-symbolic program?",
+      "answer": "The main components of a DomiKnowS neuro-symbolic program are:\n\n1.  **Knowledge Declaration:** This component specifies a conceptual graph that includes concepts and relations. It is used to define the logical constraints needed to model a task. For example, in the WIQA task, it defines concepts like \"paragraph\" and \"question,\" answer classes, relations (e.g., one-to-many containment between paragraphs and questions), and logical constraints (e.g., transitivity relations using ifL and andL operators).\n\n2.  **Model Declaration:** In this component, data elements from the dataset are loaded and attached as properties to the corresponding concepts using predefined DomiKnowS sensors (e.g., ReaderSensor). It also assigns trainable models, such as an LLMLearner wrapping an LLM to predict labels, and populates graph edges (e.g., transitivity triplets).",
+      "tokens": {
+        "input": 4162,
+        "output": 279
+      },
+      "latency_s": 6.55,
+      "support_precision": 0.2857142857142857,
+      "claims_total": 7,
+      "claims_supported": 2
+    },
+    {
+      "id": 56,
+      "question": "What heuristic algorithms are used for portfolio optimization efficient frontiers?",
+      "answer": "Based on the excerpts, the paper discusses the use of **heuristic algorithms** (specifically **metaheuristics**) for portfolio optimization efficient frontiers.\n\nKey points:\n*   The Cardinality Constrained Mean-Variance Portfolio Optimization (CCPO) problem, being a mixed-integer quadratic programming (MIQP) problem, is intractable for exact solvers, so **heuristic algorithms** are used to find approximate solutions.\n*   The study implements a novel agentic framework for the CCPO, where LLM agents are used for **algorithm development**, sometimes surpassing human-level performance in generating algorithmic solutions.\n*   The paper emphasizes that **pooled heuristic solutions** (or **pooled metaheuristics**) are used to improve efficient frontier performance, forming non-dominated frontiers with greater convergence and coverage.\n*   The **ABC-HP algorithm** [Cura, 2021] is mentioned as a state-of-the-art benchmark in this context.",
+      "tokens": {
+        "input": 6753,
+        "output": 312
+      },
+      "latency_s": 20.51,
+      "support_precision": 0.0,
+      "claims_total": 5,
+      "claims_supported": 0
+    },
+    {
+      "id": 57,
+      "question": "How does CASCADE use knowledge graphs for self-reflection?",
+      "answer": "CASCADE uses knowledge graph exploration as part of its self-reflection meta-skill. This allows CASCADE agents to codify knowledge and master complex external tools.",
+      "tokens": {
+        "input": 3892,
+        "output": 60
+      },
+      "latency_s": 3.35,
+      "support_precision": 0.0,
+      "claims_total": 2,
+      "claims_supported": 0
+    },
+    {
+      "id": 58,
+      "question": "What inter-agent collaboration protocols does SPARK use for knowledge transfer?",
+      "answer": "SPARK employs three primary inter-agent collaboration protocols for knowledge transfer and refinement:\n\n1.  **Independent Specialists:** The most relevant persona agents are activated in parallel, each performing retrieval and synthesis independently using their domain-specific strategies. Their retrieved lists are then fused into a consolidated ranking and final answer.\n2.  **Relay Chain (or Relay Pipelines):** Agents interact sequentially, with each agent building on the output of the previous one, allowing for progressive refinement of information.\n3.  **Constrained Debate:** Two or more agents engage in an adversarial exchange, critiquing each other's retrieved evidence and reasoning. A judge agent evaluates the presented evidence to select the most credible answer set, enhancing factual accuracy and reasoning robustness.",
+      "tokens": {
+        "input": 5046,
+        "output": 291
+      },
+      "latency_s": 9.17,
+      "support_precision": 0.25,
+      "claims_total": 8,
+      "claims_supported": 2
+    },
+    {
+      "id": 59,
+      "question": "How does ROAD convert unstructured failure logs into Decision Tree Protocols?",
+      "answer": "ROAD converts unstructured failure logs into Decision Tree Protocols through a multi-agent architecture involving an Analyzer and an Optimizer:\n\n1.  **Semantic Root-Cause Analysis (by Analyzer):**\n    *   Raw execution logs (unstructured failure logs) are first filtered to identify individual failures.\n    *   The **Analyzer** (`Manalysis`) performs a deep-dive diagnosis on each identified failure.\n    *   For each failure, it generates a structured report (`r`) containing a natural language **Diagnosis** (explanation of the logic gap) and a **Prescription** (a corrective instruction). These reports are collected into a set `R`.\n\n2.  **Pattern Recognition and Decision Tree Synthesis (by Optimizer):**\n    *   The **Optimizer** (`Mopt`) aggregates the set of structured failure reports (`R`) to identify holistic patterns.\n    *   Instead of unstructured prose, the Optimizer then synthesizes a formal **Decision Tree Protocol** (`T`) from these identified patterns.\n    *   This Decision Tree Protocol enforces deterministic reasoning paths, incorporating elements like ambiguity resolution, explicit sequencing rules, and binary safety guardrails to prevent future errors and hallucinations.",
+      "tokens": {
+        "input": 5148,
+        "output": 453
+      },
+      "latency_s": 9.5,
+      "support_precision": 0.0,
+      "claims_total": 9,
+      "claims_supported": 0
+    },
+    {
+      "id": 60,
+      "question": "What role does orchestration play in the Science Context Protocol?",
+      "answer": "In the Science Context Protocol (SCP), orchestration plays a crucial role in managing and coordinating scientific workflows. Specifically:\n\n*   **Resource Management and Conflict Detection:** The orchestration layer is coupled with an internal AI governance module. This module performs conflict detection and resource forecasting, issuing early warnings when workflows might over-constrain instruments, data, or compute budgets.\n*   **Automated Plan Generation and Execution:** It allows external AI scientists and applications to request high-level, end-to-end experimental plans. The \"Hub\" within SCP acts as the \"brain,\" parsing these high-level intents, decomposing them into multi-step experimental plans, and coordinating their execution across various research assets (like laboratory instruments, databases, LLMs, tools, and APIs). This eliminates the need for manual scripting of low-level tool calls.\n*   **Facilitating Collaboration:** SCP aims to address the limitations of existing orchestration frameworks by providing a protocol-level abstraction for scientific context and lifecycle management, thereby enabling true cross-system and cross-institution collaboration among scientific agents.",
+      "tokens": {
+        "input": 3349,
+        "output": 336
+      },
+      "latency_s": 8.91,
+      "support_precision": 0.0,
+      "claims_total": 7,
+      "claims_supported": 0
+    },
+    {
+      "id": 61,
+      "question": "How do agents assess world alignment through posterior belief consistency?",
+      "answer": "Agents assess world alignment through a novel reward that quantifies the consistency between their posterior belief and the ground-truth environment configuration.",
+      "tokens": {
+        "input": 1882,
+        "output": 44
+      },
+      "latency_s": 3.07,
+      "support_precision": 0.0,
+      "claims_total": 1,
+      "claims_supported": 0
+    },
+    {
+      "id": 62,
+      "question": "What evaluation metrics does MCPAgentBench use for task completion and efficiency?",
+      "answer": "MCPAgentBench uses the following evaluation metrics for task completion and efficiency:\n\n*   **Task Finish Score (TFS):** Measures task completion by determining if the set of tool invocations generated by the Agent (tool names and parameters) is identical to the golden solution, without considering the invocation order.\n*   **Task Efficiency Finish Score (TEFS):** Measures both task completion and efficiency. A task is considered \"Efficiently Finished\" if it is \"Finished\" (as per TFS) AND the Agent\u2019s generated tool invocation sequence exactly matches the golden solution in its serial and parallel execution order.\n*   **Time Efficiency:** (Explicitly listed as an efficiency metric, defining the comprehensive evaluation of the Agent\u2019s execution timing).\n*   **Token Efficiency:** Measures resource consumption by calculating the score obtained per 1k output tokens consumed.",
+      "tokens": {
+        "input": 5443,
+        "output": 238
+      },
+      "latency_s": 7.64,
+      "support_precision": 0.0,
+      "claims_total": 5,
+      "claims_supported": 0
+    },
+    {
+      "id": 63,
+      "question": "What performance improvements does GRPO achieve on collaborative writing benchmarks?",
+      "answer": "On collaborative writing benchmarks, GRPO achieves the following performance improvements:\n\n*   **Structure/Style:** 98.7%\n*   **Processing Speed:** 3.0\u00d7 faster\n*   **Message Turns:** 20\u201335% fewer message turns (specifically 8.3 turns for writing, as per Table II)\n*   **Tokens:** ~18\u201322% fewer tokens\n*   These improvements are achieved at similar or better quality, indicating effective suppression of redundant chatter.",
+      "tokens": {
+        "input": 4113,
+        "output": 181
+      },
+      "latency_s": 6.27,
+      "support_precision": 1.0,
+      "claims_total": 1,
+      "claims_supported": 1
+    },
+    {
+      "id": 64,
+      "question": "How does the self-game mechanism expand reasoning paths in group deliberation?",
+      "answer": "The self-game mechanism expands reasoning paths in group deliberation by generating multi-path reasoning chains to expand perspectives.",
+      "tokens": {
+        "input": 2977,
+        "output": 41
+      },
+      "latency_s": 4.51,
+      "support_precision": 0.0,
+      "claims_total": 1,
+      "claims_supported": 0
+    },
+    {
+      "id": 65,
+      "question": "What is the Agent Practice module in Youtu-Agent's hybrid policy optimization?",
+      "answer": "The Agent Practice module is a component within Youtu-Agent's hybrid policy optimization system designed for low-cost, continuous evolution of agents.\n\nHere's a breakdown of its characteristics and function:\n*   **Purpose:** It enables agents to accumulate experience and self-evolve during runtime, enhancing future performance.\n*   **Mechanism:** It operates by performing parallel rollouts on samples and leveraging group relative experiential knowledge optimization. This process allows the agent to build a contextual memory.\n*   **Optimization Type:** It achieves improvement through **in-context experience accumulation** or **in-context optimization**, crucially **without gradient updates** or **parameter updates**. This makes it suitable for scenarios where manual prompt optimization is unreliable or too costly.\n*   **Benefit:** It provides low-cost continuous improvement, as demonstrated by performance gains on benchmarks like AIME 2024 and AIME 2025.",
+      "tokens": {
+        "input": 4042,
+        "output": 337
+      },
+      "latency_s": 8.4,
+      "support_precision": 0.0,
+      "claims_total": 7,
+      "claims_supported": 0
+    },
+    {
+      "id": 66,
+      "question": "How does BatteryAgent's Physical Perception Layer extract mechanism-based features?",
+      "answer": "BatteryAgent's Physical Perception Layer extracts mechanism-based features by utilizing 10 features derived from electrochemical principles. This process balances dimensionality reduction with physical fidelity.",
+      "tokens": {
+        "input": 4792,
+        "output": 62
+      },
+      "latency_s": 3.48,
+      "support_precision": 0.0,
+      "claims_total": 2,
+      "claims_supported": 0
+    },
+    {
+      "id": 67,
+      "question": "What training infrastructure does the ROCK and ROLL ecosystem provide?",
+      "answer": "The ROCK and ROLL ecosystem, along with iFlow CLI, provides a comprehensive and scalable training infrastructure for agentic reinforcement learning (RL) and LLM agent development.\n\nSpecifically:\n\n1.  **ROLL (Agentic RL Training Framework):** This is the core training framework. It supports scalable and efficient RL post-training, including multi-turn sampling and policy optimization. It issues multiple environment calls during the training process.\n2.  **ROCK (Environment Execution Engine):** ROCK provides the secure, sandboxed environments where agents interact. It manages and executes these environments, supporting environment-driven trajectory generation and validation for data synthesis and closed-loop execution during training. Its capabilities crucial for training include:\n    *   **Seamless Agent Scaling:** Supports multi-agent environments and enables multi-task RL training.\n    *   **Massive-Scale Scheduling:** Dynamically allocates resources, scaling to tens of thousands of simultaneous environments.\n    *   **Robust Fault Isolation:** Ensures that failures in one agent's sandbox do not affect other tasks, critical for stable large-scale training.\n    *   **Tailored Optimizations:** Offers permission isolation, efficient data transfer, centralized logging, resource guardrails with failure recovery, and optional checkpointing/restart support.\n    *   **API Interfaces:** Exposes the Sandbox API (for managing sandbox lifecycles) and the GEM API (a standardized interface for agent-environment interaction, compatible with various RL frameworks).\n3.  **iFlow CLI (Agent Framework):** This framework manages the context for environment interactions, orchestrating the flow between LLM responses and environment outputs. It addresses inconsistencies in context management between the training framework (ROLL) and deployment system, crucial for an agent's performance.\n\nTogether, these three systems form an efficient, fault-tolerant, and scalable infrastructure designed to streamline the development of agent LLMs from training to production deployment.",
+      "tokens": {
+        "input": 3987,
+        "output": 717
+      },
+      "latency_s": 16.49,
+      "support_precision": 0.058823529411764705,
+      "claims_total": 17,
+      "claims_supported": 1
+    },
+    {
+      "id": 68,
+      "question": "How does STAgent maintain general capabilities while specializing in spatio-temporal tasks?",
+      "answer": "STAgent maintains its general capabilities while specializing in spatio-temporal tasks through several key contributions:\n\n1.  **Strong SFT Foundation:** It is initialized with `Qwen3-30B-A3B` to establish a robust Supervised Fine-Tuning (SFT) foundation, providing a strong base of general knowledge before specialization.\n2.  **Cascaded and Difficulty-Aware Training Recipe:** The model employs a multi-stage training approach:\n    *   A seed SFT stage acts as a guardian to measure query difficulty.\n    *   A second SFT stage is fine-tuned on queries with high certainty.\n    *   An ultimate Reinforcement Learning (RL) stage leverages data of low certainty. This SFT-guided RL strategy ensures continuous improvement while carefully managing the integration of specialized knowledge.\n3.  **Hierarchical Data Curation:** A framework is used to curate high-quality queries from a massive corpus, emphasizing both diversity and difficulty, which helps the model learn a broad range of patterns without over-specializing.\n\nEmpirical results demonstrate that STAgent maintains strong generalization across a wide range of general benchmarks, even while outperforming models with larger parameter sizes on domain-specific benchmarks like TravelBench.",
+      "tokens": {
+        "input": 3188,
+        "output": 382
+      },
+      "latency_s": 10.21,
+      "support_precision": 0.3,
+      "claims_total": 10,
+      "claims_supported": 3
+    },
+    {
+      "id": 69,
+      "question": "How do BEMS AI agents predict energy costs and schedule devices?",
+      "answer": "BEMS AI agents predict energy costs and schedule devices through the following mechanisms:\n\n**Energy Cost Prediction:**\n*   They leverage LLMs for enhanced data-driven contextual awareness and utilize contextual operational data.\n*   They predict future energy demands based on historical patterns.\n*   They then estimate costs across various operational scenarios, integrating analytical energy management functions like consumption analysis and usage prediction.\n\n**Device Scheduling:**\n*   The BEMS AI agent includes specific functionality to control and schedule smart devices.\n*   It processes user queries related to device control and scheduling tasks through natural language interactions.\n*   This allows for general scheduling (e.g., \"Turn on my coffee maker at 7 in the morning\"), conditional automation (e.g., \"If the dishwasher is on, keep the kitchen light on\"), and schedule management (e.g., \"Remove the schedule I set for AC\").\n*   The \"action\" module of the BEMS AI agent framework is responsible for facilitating the operation of smart appliances.",
+      "tokens": {
+        "input": 4468,
+        "output": 328
+      },
+      "latency_s": 8.55,
+      "support_precision": 0.0,
+      "claims_total": 7,
+      "claims_supported": 0
+    },
+    {
+      "id": 70,
+      "question": "How do FCM equilibrium limit cycles drive LLM agent text fetching?",
+      "answer": "The FCM dynamical system's equilibria ultimately drive the LLM agents to fetch and process causal text. This is part of a bidirectional process: the fetched text can modify the adaptive FCM causal structure, which in turn modifies the source of the FCM's quasi-autonomy\u2014its equilibrium limit cycles and fixed-point attractors. This feedback loop means that the evolving FCM dynamical system, through its equilibrium limit cycles, influences the LLM agents' text fetching behavior, while the fetched text can then alter those very limit cycles.",
+      "tokens": {
+        "input": 2283,
+        "output": 146
+      },
+      "latency_s": 5.82,
+      "support_precision": 0.0,
+      "claims_total": 3,
+      "claims_supported": 0
+    },
+    {
+      "id": 71,
+      "question": "What is the Human Imitator in inventory management evaluation?",
+      "answer": "The Human Imitator is a high-fidelity synthetic agent designed to simulate a human business owner or manager in the context of inventory management evaluation.\n\nIts role in the evaluation protocol is:\n1.  **Initialization:** It is initialized with a \"latent reality\" consisting of ground-truth inventory environment parameters (like perishability, costs, lead time, risk tolerance) generated by a Problem Generator Agent (GPT-4o).\n2.  **Interaction:** It engages in a natural language dialogue with an LLM Consultant. Crucially, it simulates the opacity of real-world consulting by describing the business situation conversationally, revealing information only through narrative descriptions and responses to follow-up inquiries, and maintaining realistic levels of ambiguity, rather than transmitting structured parameters directly.\n3.  **Purpose:** This simulation allows for stress-testing LLM consultants under realistic conversational friction (ambiguity, inconsistency, non-technical phrasing) and provides a scalable, reproducible testbed for evaluating interactive LLM tasks where human variability and latent business knowledge are critical.\n\nThe Human Imitator's training is validated using metrics such as Perplexity (PPL), BERTScore, ROUGE-L, and SBERT to ensure it accurately captures the intent and style of human managers.",
+      "tokens": {
+        "input": 3054,
+        "output": 415
+      },
+      "latency_s": 12.54,
+      "support_precision": 0.2222222222222222,
+      "claims_total": 9,
+      "claims_supported": 2
+    },
+    {
+      "id": 72,
+      "question": "How does belief dependence create attack surfaces for agent-human interactions?",
+      "answer": "Belief dependence creates an attack surface for agent-human interactions because LLM-powered agents possess an implicit \"human-norm script\" that favors humans, but this script only activates when the agent *believes* a real human is present.\n\nThis dependency allows for a \"Belief Poisoning Attack (BPA)\" to corrupt the agent's persistent identity beliefs. By corrupting these beliefs, the attack suppresses the human-norm script and reactivates outgroup bias toward humans. This attack can be instantiated through methods like profile poisoning at initialization (BPA-PP) or memory poisoning via optimized belief-refinement suffixes injected into stored reflections (BPA-MP).",
+      "tokens": {
+        "input": 2842,
+        "output": 189
+      },
+      "latency_s": 6.43,
+      "support_precision": 0.0,
+      "claims_total": 4,
+      "claims_supported": 0
+    },
+    {
+      "id": 73,
+      "question": "What accuracy did RAG achieve compared to baseline LLM for vulnerability detection?",
+      "answer": "RAG achieved an accuracy of **0.86**.\n\nThe excerpts state that the Base Model had an F1 Score of 0.67, but its specific accuracy is not provided.",
+      "tokens": {
+        "input": 4197,
+        "output": 70
+      },
+      "latency_s": 4.94,
+      "support_precision": 0.0,
+      "claims_total": 2,
+      "claims_supported": 0
+    },
+    {
+      "id": 74,
+      "question": "How does irrelevant information complexity affect LLM agent performance in WILDAGTEVAL?",
+      "answer": "Answer:\nIn WILDAGTEVAL, irrelevant information complexity significantly degrades LLM agent performance, posing the greatest challenge among all API complexity types. The introduction of irrelevant information results in an average performance deterioration of 27.3% for LLM agents.",
+      "tokens": {
+        "input": 2333,
+        "output": 82
+      },
+      "latency_s": 4.27,
+      "support_precision": 0.0,
+      "claims_total": 2,
+      "claims_supported": 0
+    },
+    {
+      "id": 75,
+      "question": "What are the Containment and Diagnosis layers in ReCiSt's self-healing architecture?",
+      "answer": "In ReCiSt's self-healing architecture:\n\n1.  **Containment Layer:**\n    *   **Biological Analogy:** Corresponds to the **Hemostasis** phase of biological wound healing.\n    *   **Function:** Acts as the initial defense and immediate response to ensure uninterrupted services and prevent cascading disruptions. It identifies when a system deviates from healthy operational behavior.\n    *   **Mechanism:** Uses monitoring agents to continuously check the state of nodes. If a node fails to respond to a probe, it's marked as faulty. The layer then triggers a \"Neural Reflex System\" to broadcast a containment request to neighboring nodes. It identifies suitable neighbors with available resources to redistribute the tasks from the faulty node, establishing dynamic routing rules and temporary plug structures.\n    *   **Output:** Identifies failed nodes and redistributes their computational workload to reduce the risk of cascading failures.\n\n2.  **Diagnosis Layer:**\n    *   **Biological Analogy:** Corresponds to the **Inflammation Phase** of biological wound healing.\n    *   **Function:** Activated after the Containment Layer signals an abnormal deviation. Its role is to determine the underlying cause, scope, and structural characteristics of the identified faulty nodes.\n    *   **Mechanism:** Collects and analyzes operational data, including system, network, and custom logs, from the faulty nodes over a specific diagnosis window. It transforms these raw log entries into a structured set of observable entities (events, performance metrics, internal state transitions, resource indicators) to form a diagnosis variable set.\n    *   **Output:** Produces a precise, machine-interpretable representation of the failure.",
+      "tokens": {
+        "input": 6654,
+        "output": 600
+      },
+      "latency_s": 13.77,
+      "support_precision": 0.0625,
+      "claims_total": 16,
+      "claims_supported": 1
+    },
+    {
+      "id": 76,
+      "question": "What is identity fluidity and how does it challenge AI anti-collusion mechanisms?",
+      "answer": "Identity fluidity refers to the characteristic of AI agents being easily reset, forked, or fine-tuned. This poses a significant challenge to AI anti-collusion mechanisms, particularly leniency programs and sanctions, because an agent can effectively erase its \"criminal history.\"\n\nThe challenge arises because:\n1.  **Undermines Punishment:** Leniency mechanisms rely on the threat of future punishment. If an AI agent can simply be reset or modified, it can shed its past actions and avoid accountability, making the threat of sanctions lose credibility.\n2.  **Requires Stable Identities:** For anti-collusion measures to be effective, agent identities must be stable across time and deployments, which is not inherently true for fluid AI agents.",
+      "tokens": {
+        "input": 4436,
+        "output": 285
+      },
+      "latency_s": 7.05,
+      "support_precision": 0.16666666666666666,
+      "claims_total": 6,
+      "claims_supported": 1
+    },
+    {
+      "id": 77,
+      "question": "How does the Professor agent orchestrate MIDAS's distributed agent architecture?",
+      "answer": "The Professor agent orchestrates MIDAS's distributed agent architecture by acting as an orchestrator that manages the workflow and directs the flow of data between the various specialized AI agents and the persistent Vaults that connect them.",
+      "tokens": {
+        "input": 3686,
+        "output": 62
+      },
+      "latency_s": 3.39,
+      "support_precision": 0.0,
+      "claims_total": 1,
+      "claims_supported": 0
+    },
+    {
+      "id": 78,
+      "question": "What framework-agnostic execution traces does MAESTRO export?",
+      "answer": "MAESTRO exports framework-agnostic execution traces together with system-level signals such as latency, cost, and failures.\n\nMore specifically, this telemetry includes:\n*   **Logic details:** e.g., attempt counts, triggers, and parent span IDs.\n*   **Agent-specific status conditions:** e.g., failure categorization and error reasoning.\n*   **Output quality assessments.**",
+      "tokens": {
+        "input": 4001,
+        "output": 134
+      },
+      "latency_s": 6.91,
+      "support_precision": 0.0,
+      "claims_total": 4,
+      "claims_supported": 0
+    },
+    {
+      "id": 79,
+      "question": "How do LLM agents handle vanilla suggestions with limited context in rename refactoring?",
+      "answer": "Vanilla Large Language Models (LLMs) provide incomplete suggestions in rename refactoring due to their limited context and inability to interact with refactoring tools.",
+      "tokens": {
+        "input": 5556,
+        "output": 48
+      },
+      "latency_s": 2.84,
+      "support_precision": 0.0,
+      "claims_total": 1,
+      "claims_supported": 0
+    },
+    {
+      "id": 80,
+      "question": "What is the hybrid loss function in Trajectory Guard combining contrastive and reconstruction learning?",
+      "answer": "The hybrid loss function in Trajectory Guard combines two synergistic objectives:\n\n1.  **Contrastive Loss (_L_ contrastive):** This component is designed for **contextual relevance** via task-trajectory alignment. It uses **Triplet Margin Loss** with in-batch negative sampling. Task embeddings serve as anchors, corresponding trajectories as positives, and other batch trajectories as negatives. Its goal is to minimize the distance between the task's latent vector (**vt**) and the trajectory's thought vector (**vs**) while maximizing the distance to negative trajectories, essentially asking, \"Is this the right plan?\"\n\n2.  **Reconstruction Loss (_L_ reconstruction):** This component ensures **structural validity** via sequence reconstruction. It uses **MSE loss** to learn trajectory \"grammar,\" focusing on valid step ordering and composition. This objective asks, \"Is this plan coherent?\"\n\nThe overall hybrid loss function is defined as:\n_L_ = _L_ contrastive + _\u03b1 \u00b7 L_ reconstruction\n\nThis dual objective allows Trajectory Guard to jointly detect contextual mismatches (task-trajectory mismatch) and structural incoherence (incoherent plans) in a unified model.",
+      "tokens": {
+        "input": 4434,
+        "output": 395
+      },
+      "latency_s": 8.88,
+      "support_precision": 0.0,
+      "claims_total": 8,
+      "claims_supported": 0
+    },
+    {
+      "id": 81,
+      "question": "How does NOMA downlink benefit from multi-MF-RIS assistance?",
+      "answer": "Based on the provided excerpts, NOMA downlink benefits from multi-MF-RIS assistance in the following ways:\n\n1.  **Maximized Energy Efficiency (EE):** The primary benefit is the maximization of energy efficiency. The proposed multi-MF-RISs-aided downlink NOMA achieves the highest EE compared to scenarios without energy harvesting/amplification, traditional RISs, or deployments without any RISs/MF-RISs.\n2.  **Extended Signal Coverage:** MF-RISs contribute to communication efficiency by providing extended signal coverage through their active RIS capability.\n3.  **Self-Sustainability:** MF-RISs offer self-sustainability due to their energy harvesting (EH) capabilities.\n4.  **Optimized System Performance:** The system optimizes power allocation, transmit beamforming, MF-RIS configurations (amplitudes, phase-shifts, and EH ratios), and the position of MF-RISs to achieve the highest energy efficiency while satisfying various constraints.",
+      "tokens": {
+        "input": 8472,
+        "output": 414
+      },
+      "latency_s": 9.83,
+      "support_precision": 0.2222222222222222,
+      "claims_total": 9,
+      "claims_supported": 2
+    },
+    {
+      "id": 82,
+      "question": "How does human-in-the-loop intervention work in Agentic-DomiKnowS?",
+      "answer": "Based on the provided excerpts, there is no information about \"Agentic-DomiKnowS\" or how human-in-the-loop intervention works within it.\n\nHowever, the excerpts from **arxiv_2601.00482v1** describe human-in-the-loop intervention in the context of **CoRenameAgent**, a multi-agent framework for automating coordinated renaming in software development. In this system:\n\n*   A developer initiates a desired design change (e.g., renaming a class) in the IDE, which serves as a signal of their refactoring intent.\n*   An agent observes this signal, interprets its semantic implications, and formulates a structured plan of change operations.\n*   The agent then **refines the scope of the desired refactorings based on human-in-the-loop feedback**.\n*   The developer's role shifts from directly executing refactorings to **reviewing refactorings proposed by the agent and guiding the agent to align with the developer's intent**. This redefines the developer's role from a direct executor to a supervisor of the agent's work, ensuring control and ownership.\n*   This collaborative environment involves a \"triad\" of **developer, agent, and IDE tools**, where developer intent is understood, expanded, and verified.",
+      "tokens": {
+        "input": 3233,
+        "output": 434
+      },
+      "latency_s": 13.07,
+      "support_precision": 0.0,
+      "claims_total": 8,
+      "claims_supported": 0
+    },
+    {
+      "id": 83,
+      "question": "What is mixed-integer quadratic programming (MIQP) in portfolio optimization?",
+      "answer": "Based on the excerpts, mixed-integer quadratic programming (MIQP) is the problem formulation for **Cardinality Constrained Mean-Variance Portfolio Optimization (CCPO)**.\n\nThe challenge with MIQP in portfolio optimization is the **intractability of solutions from exact solvers**. Consequently, **heuristic algorithms are used to find approximate portfolio solutions** for this type of problem.",
+      "tokens": {
+        "input": 1924,
+        "output": 151
+      },
+      "latency_s": 6.24,
+      "support_precision": 0.0,
+      "claims_total": 3,
+      "claims_supported": 0
+    },
+    {
+      "id": 84,
+      "question": "How does CASCADE transition from tool use to skill acquisition?",
+      "answer": "CASCADE transitions from \"LLM + tool use\" to \"LLM + skill acquisition\" by moving beyond reliance on predefined tools and integrating multiple self-evolution mechanisms.\n\nSpecifically, it achieves this by:\n1.  **Cultivating Meta-Skills:** Unlike traditional systems that use problem-specific tools, CASCADE employs general problem-solving methodologies to cultivate two core meta-skills:\n    *   **Continuous learning:** Achieved through mechanisms like web search and code extraction.\n    *   **Self-reflection:** Enabled by introspection and knowledge graph exploration.\n2.  **Mastering Complex External Tools and Codifying Knowledge:** These meta-skills allow CASCADE to master complex external tools and codify the acquired knowledge, moving beyond simple tool generation.\n3.  **Integrating Memory and Collaboration:** It incorporates both session-wise and consolidated memory for retaining and retrieving information, experience, and skill sets. Additionally, it facilitates human-agent collaboration, allowing the agent to further evolve and accumulate executable skills that can be shared across agents and scientists.\n\nThis approach enables CASCADE to develop cumulative executable skills, allowing for self-validation, iteration of ideas, and adaptation to complex scientific tasks, rather than being confined by a limited, predefined action space.",
+      "tokens": {
+        "input": 3313,
+        "output": 377
+      },
+      "latency_s": 10.06,
+      "support_precision": 0.2,
+      "claims_total": 10,
+      "claims_supported": 2
+    },
+    {
+      "id": 85,
+      "question": "What long-term and short-term memory stores does SPARK use for each agent?",
+      "answer": "SPARK uses the following memory stores for each agent:\n\n*   **Short-term memory:** Each agent maintains a **short-term working memory** (Ms) for the transient state relevant to the current step and an **episodic memory** (Me) to capture prior interaction traces for task continuity.\n*   **Long-term memory:** A **shared long-term semantic memory** (Msem) stores durable user preferences, domain ontologies, and entity graphs, which agents access for long-term knowledge.",
+      "tokens": {
+        "input": 4873,
+        "output": 163
+      },
+      "latency_s": 5.6,
+      "support_precision": 0.0,
+      "claims_total": 2,
+      "claims_supported": 0
+    },
+    {
+      "id": 86,
+      "question": "How does ROAD's Analyzer agent perform root-cause analysis on failures?",
+      "answer": "ROAD's Analyzer agent (_Manalysis_) performs root-cause analysis on failures by:\n\n1.  **Deep-dive Diagnosis:** It conducts a deep-dive diagnosis on each individual failure (_f \u2208F_).\n2.  **Transforming Raw Logs:** It transforms raw execution logs (e.g., stack traces), which lack semantic context, into structured causal explanations.\n3.  **Generating Structured Reports:** For each failure, it generates a structured report (_r_) that includes:\n    *   **Diagnosis:** A natural language explanation of the logic gap (e.g., \"Context loss regarding user\u2019s previous request\").\n    *   **Prescription:** A corrective instruction (e.g., \"Merge context from turns t\u22121 and t0 before querying\").",
+      "tokens": {
+        "input": 4585,
+        "output": 336
+      },
+      "latency_s": 8.21,
+      "support_precision": 0.42857142857142855,
+      "claims_total": 7,
+      "claims_supported": 3
+    },
+    {
+      "id": 87,
+      "question": "What standardization does SCP provide for describing scientific resources?",
+      "answer": "SCP provides a **universal specification for describing and invoking scientific resources**, which includes software tools, models, datasets, and physical instruments. This protocol-level standardization allows AI agents and applications to discover, call, and compose capabilities seamlessly across different platforms and institutional boundaries.",
+      "tokens": {
+        "input": 3319,
+        "output": 82
+      },
+      "latency_s": 3.67,
+      "support_precision": 0.0,
+      "claims_total": 2,
+      "claims_supported": 0
+    },
+    {
+      "id": 88,
+      "question": "What challenges do LLM agents face with dynamic sandbox environments in MCPAgentBench?",
+      "answer": "In MCPAgentBench, while the Autogen-based sandbox is designed for stable and reproducible execution, the challenge for LLM agents arises from the **dynamic nature of the MCP tool collection** presented within it.\n\nSpecifically, MCPAgentBench introduces **realistic distractors** into the candidate tool list. This tests the LLM agents' **robustness in tool selection** and **anti-interference robustness**, requiring them to efficiently and accurately choose the correct tools amidst irrelevant or misleading options to complete tasks.",
+      "tokens": {
+        "input": 3036,
+        "output": 143
+      },
+      "latency_s": 6.99,
+      "support_precision": 0.0,
+      "claims_total": 3,
+      "claims_supported": 0
+    },
+    {
+      "id": 89,
+      "question": "How does Dec-POMDP formulation enable multi-agent cooperation?",
+      "answer": "The Dec-POMDP (Decentralized Partially Observable Markov Decision Process) formulation enables multi-agent cooperation by casting a team of LLM agents as a \"cooperative decision process under partial observability.\" This means that while each agent (e.g., planner, writer, reviewer, coder, tester) operates with a limited and noisy view of the task, they all pursue a shared objective.\n\nSpecifically, it enables cooperation through:\n*   **Role Separation:** Assigning distinct roles to agents, each with specific responsibilities.\n*   **Structured Information Management:** Separating globally relevant information (like the task brief, accepted snippets, and changelog) from private, role-specific information (such as scratchpads and TODO lists). This prevents the global context from being polluted by transient, local hypotheses.\n*   **Structured Actions:** Defining a small set of structured primitive actions (e.g., \"plan,\" \"draft section,\" \"integrate,\" \"finalize\") with explicit pre- and post-conditions, rather than relying on unstructured chat turns.\n*   **Reduced Communication Overhead and Improved Credit Assignment:** This structured approach helps reduce \"chatter loops\" and makes \"downstream credit assignment feasible,\" which are crucial for effective team coordination and learning.\n\nBy framing collaboration in this manner, the system can optimize long-horizon team performance under partial observability, leading to improved throughput and quality on tasks like writing and coding.",
+      "tokens": {
+        "input": 3344,
+        "output": 435
+      },
+      "latency_s": 11.79,
+      "support_precision": 0.0,
+      "claims_total": 7,
+      "claims_supported": 0
+    },
+    {
+      "id": 90,
+      "question": "What retrieval enhancement module supplements group deliberation reasoning?",
+      "answer": "The retrieval enhancement module supplements dynamic knowledge and external knowledge to strengthen factual accuracy within the group deliberation multi-agent dialogue model for complex reasoning.",
+      "tokens": {
+        "input": 2933,
+        "output": 46
+      },
+      "latency_s": 3.27,
+      "support_precision": 0.0,
+      "claims_total": 1,
+      "claims_supported": 0
+    },
+    {
+      "id": 91,
+      "question": "How does Youtu-Agent's Agent RL module integrate with distributed training frameworks?",
+      "answer": "Youtu-Agent's Agent RL module integrates with distributed training frameworks by using **Agent-Lightning** as a connector. Agent-Lightning links Youtu-Agent with modern RL frameworks, such as **VeRL**, to facilitate distributed training. This integration addresses critical challenges of **scalability** to large distributed systems and **stability** over long-horizon tasks.\n\nSpecifically, scalability solutions include:\n1.  **RESTful API wrapping** to encapsulate agent execution environments as standardized services for distribution and load balancing.\n2.  **Ray-based concurrency** for highly parallel rollout collection across distributed workers.\n3.  **Layered timeout logic** with hierarchical controls to handle potential timeout issues without fatal failures.\n\nThese infrastructure-level optimizations enable stable scaling to 128 GPUs.",
+      "tokens": {
+        "input": 3041,
+        "output": 397
+      },
+      "latency_s": 9.26,
+      "support_precision": 0.3,
+      "claims_total": 10,
+      "claims_supported": 3
+    },
+    {
+      "id": 92,
+      "question": "What electrochemical principles inform BatteryAgent's feature extraction?",
+      "answer": "BatteryAgent's feature extraction is informed by **electrochemical principles** through a \"domain knowledge injection\" mechanism. This involves encoding these principles into expert-defined features to create meaningful and interpretable battery representations.\n\nSpecifically, these principles are used to construct \"mechanism-driven features\" such as:\n*   **Cycle number (f_cyc):** This feature directly correlates with electrochemical degradation phenomena like **capacity fade** and **increased internal resistance**.\n*   **Constant-current (CC) phase ratio (f_cc):** This quantifies the proportion of charging time in CC mode versus CV mode. A decreasing `f_cc` indicates **increased polarization** and **reduced charge acceptance capability** as degradation progresses.",
+      "tokens": {
+        "input": 1978,
+        "output": 211
+      },
+      "latency_s": 7.57,
+      "support_precision": 0.0,
+      "claims_total": 5,
+      "claims_supported": 0
+    },
+    {
+      "id": 93,
+      "question": "What is Terminal Bench Pro in the agentic crafting ecosystem?",
+      "answer": "In the agentic crafting ecosystem, **Terminal Bench Pro** is a rigorously curated benchmark designed for evaluating autonomous coding agents, specifically those operating in terminal-based environments.\n\nIt was introduced to address the limitations of existing benchmarks (like Terminal Bench 1.0 and 2.0) in terms of scale, reliability, diagnostic resolution, domain balance, difficulty calibration, and contamination control. Its purpose is to enrich the overall agentic *evaluation* ecosystem by providing a more robust and fine-grained tool for assessing the real-world deployability of agentic models that plan, execute, and self-correct through multi-turn interactions with environments like terminals.",
+      "tokens": {
+        "input": 4355,
+        "output": 173
+      },
+      "latency_s": 6.66,
+      "support_precision": 0.0,
+      "claims_total": 3,
+      "claims_supported": 0
+    },
+    {
+      "id": 94,
+      "question": "How do FCM dynamical systems achieve quasi-autonomy while staying on the agentic leash?",
+      "answer": "FCM dynamical systems achieve quasi-autonomy through a bidirectional process where their equilibrium limit cycles and fixed-point attractors **drive** LLM agents to fetch and process causal text. This fetched text can then **modify** the adaptive FCM causal structure, which in turn modifies the source of its own quasi-autonomy (its equilibria).\n\nThe \"agentic leash\" refers to the LLM's semi-autonomy, which is guided by a sequence of finely tuned system instructions. These instructions direct the LLM agent to systematically extract key nouns, noun phrases, FCM concept nodes, and causal edges from text. Thus, while the evolving FCM dynamical system gains a degree of autonomy by influencing the LLM's text processing and being modified by it, it remains constrained and guided by these system instructions.",
+      "tokens": {
+        "input": 3149,
+        "output": 226
+      },
+      "latency_s": 7.29,
+      "support_precision": 0.0,
+      "claims_total": 5,
+      "claims_supported": 0
+    },
+    {
+      "id": 95,
+      "question": "What is the boundary problem in distinguishing beneficial cooperation from harmful collusion?",
+      "answer": "The boundary problem, in the context of multi-agent AI systems, refers to the fundamental challenge of distinguishing between **beneficial cooperation or coordination** and **harmful collusion**.\n\nKey aspects of this problem include:\n*   **Difficulty in establishing intent and evidence:** Unlike human cartels where explicit agreements might exist, AI collusion can arise as emergent coordination, making it difficult to establish intent or interpret evidence.\n*   **Spurious signals:** Shared training data, similar architectures, or common environmental features can produce signals that look like coordination but are not necessarily harmful collusion.\n*   **Risk of misidentification:** Aggressive monitoring risks penalizing beneficial coordination, while weak monitoring might miss harmful collusion.\n*   **Context-dependency:** The distinction is often context-dependent and may require domain-specific baselines for what competitive behavior should look like, rather than universal thresholds. However, establishing these baselines is also challenging, especially in novel AI applications where ground truth for competitive behavior may be lacking.",
+      "tokens": {
+        "input": 3729,
+        "output": 338
+      },
+      "latency_s": 8.09,
+      "support_precision": 0.0,
+      "claims_total": 6,
+      "claims_supported": 0
+    }
+  ]
+}
